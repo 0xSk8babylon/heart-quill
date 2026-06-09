@@ -103,8 +103,6 @@ export function HomeTwin({ onGoals }: { onGoals: () => void }) {
         <div className="twin-visual"><DigitalTwin glow={GLOW} accentWarn={ACCENT} dark /></div>
         <div className="hero-copy">
           <h1 className="hero-title">Welcome<br />home,</h1>
-          <p className="hero-sub">are you ready?</p>
-          <span className="hero-script">let&rsquo;s begin</span>
         </div>
 
         <div className="twin-status">
@@ -117,11 +115,8 @@ export function HomeTwin({ onGoals }: { onGoals: () => void }) {
           <StatusItem icon="search" label="Missing items" value={String(needs)}>
             <span className="status-note">{needs ? "needs your confirmation" : "all systems confirmed"}</span>
           </StatusItem>
-          <button className="status-next" onClick={onGoals}>
-            <span className="status-next-label">Next step</span>
-            <span className="status-next-value">Set your goals <Icon name="arrow" size={18} /></span>
-          </button>
         </div>
+
       </section>
 
       <aside className="rail">
