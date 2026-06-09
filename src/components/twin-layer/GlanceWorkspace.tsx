@@ -5,10 +5,10 @@ import { Icon, type IconName } from "./Icon";
 type GlanceKey = "update" | "expand" | "compare" | "goals";
 
 const ITEMS: Array<{ key: GlanceKey; icon: IconName; title: string; sub: string }> = [
-  { key: "update", icon: "spark", title: "Update your twin", sub: "Refresh facts & confirmations" },
-  { key: "expand", icon: "layers", title: "Explore future expansions", sub: "What's possible next" },
-  { key: "compare", icon: "shield", title: "Compare ecosystems", sub: "Side-by-side trade-offs" },
-  { key: "goals", icon: "target", title: "Set goals & priorities", sub: "Shape your plan" },
+  { key: "update", icon: "spark", title: "Update", sub: "Refresh facts & confirmations" },
+  { key: "expand", icon: "layers", title: "Explore", sub: "What's possible next" },
+  { key: "compare", icon: "shield", title: "Compare", sub: "Side-by-side trade-offs" },
+  { key: "goals", icon: "target", title: "Decide", sub: "Shape your plan" },
 ];
 
 const CONTENT: Record<GlanceKey, { eyebrow: string; title: string; body: string; cta: string }> = {
