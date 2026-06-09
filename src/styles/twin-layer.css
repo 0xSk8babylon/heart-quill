@@ -509,3 +509,160 @@ h1,h2,h3 { margin: 0; }
 @media (max-width: 720px) {
   .glance-workspace { grid-template-columns: 1fr; }
 }
+
+/* Ecosystem comparison */
+.eco-compare { display: flex; flex-direction: column; gap: 14px; }
+.eco-compare-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; }
+.eco-sub { color: var(--muted); font-size: 0.85rem; margin: 4px 0 0; max-width: 60ch; }
+.eco-table {
+  display: grid;
+  gap: 1px;
+  background: var(--line-soft);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--r-md);
+  overflow: hidden;
+}
+.eco-row {
+  display: grid;
+  grid-template-columns: 1.4fr 0.9fr 1fr 0.9fr 1.4fr 0.9fr 1.4fr;
+  gap: 1px;
+  background: var(--line-soft);
+}
+.eco-row > .eco-col { background: var(--surface-2); padding: 12px; min-width: 0; }
+.eco-row-head > .eco-col {
+  background: var(--surface-hi);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  font-weight: 600;
+}
+.eco-col-name { display: flex; gap: 10px; align-items: flex-start; }
+.eco-col-practices { background: color-mix(in srgb, var(--twin-glow) 6%, var(--surface-2)) !important; }
+.eco-rank {
+  flex-shrink: 0;
+  width: 24px; height: 24px;
+  display: grid; place-items: center;
+  border-radius: 999px;
+  background: var(--twin-glow);
+  color: var(--bg-0);
+  font-size: 0.75rem; font-weight: 700;
+}
+.eco-name-block strong { color: var(--ink); font-size: 0.95rem; display: block; }
+.eco-products { list-style: none; margin: 6px 0 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.eco-products li { font-size: 0.78rem; color: var(--muted); }
+.eco-pill {
+  display: inline-flex; align-items: center;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 0.74rem; font-weight: 600;
+  border: 1px solid transparent;
+}
+.eco-pill-ok { background: color-mix(in srgb, var(--ok) 20%, transparent); color: var(--ok); border-color: color-mix(in srgb, var(--ok) 35%, transparent); }
+.eco-pill-warn { background: color-mix(in srgb, var(--accent-warn) 18%, transparent); color: var(--accent-warn); border-color: color-mix(in srgb, var(--accent-warn) 35%, transparent); }
+.eco-pill-off { background: color-mix(in srgb, var(--off) 20%, transparent); color: var(--ink-2); border-color: var(--line); }
+.eco-dots { display: inline-flex; gap: 4px; margin-left: 8px; vertical-align: middle; }
+.eco-dot { width: 8px; height: 8px; border-radius: 999px; background: var(--off); opacity: 0.4; }
+.eco-dot-ok { background: var(--ok); opacity: 1; }
+.eco-dot-warn { background: var(--accent-warn); opacity: 1; }
+.eco-dot-off { background: var(--off); opacity: 0.8; }
+.eco-dot-empty { background: var(--line); opacity: 1; }
+.eco-note { font-size: 0.78rem; color: var(--muted); margin: 8px 0 0; line-height: 1.4; }
+.eco-meta { font-size: 0.78rem; color: var(--ink-2); margin: 8px 0 0; }
+.eco-list, .eco-checklist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+.eco-list li { font-size: 0.8rem; color: var(--ink-2); }
+.eco-checklist li { font-size: 0.78rem; color: var(--ink-2); display: flex; align-items: flex-start; gap: 6px; line-height: 1.35; }
+.eco-checklist li > :first-child { color: var(--ok); flex-shrink: 0; margin-top: 3px; }
+.eco-empty { padding: 30px; text-align: center; color: var(--muted); }
+
+@media (max-width: 1100px) {
+  .eco-row { grid-template-columns: 1fr; }
+  .eco-row-head { display: none; }
+  .eco-col { padding: 14px; }
+  .eco-col::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+}
+
+/* Ingest form */
+.eco-ingest { display: flex; flex-direction: column; gap: 18px; }
+.eco-ingest-head { display: flex; flex-direction: column; gap: 4px; }
+.eco-ingest-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+@media (max-width: 720px) { .eco-ingest-grid { grid-template-columns: 1fr; } }
+.eco-form, .eco-upload {
+  background: var(--surface-2);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--r-md);
+  padding: 16px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.eco-field { display: flex; flex-direction: column; gap: 4px; font-size: 0.82rem; color: var(--ink-2); }
+.eco-field input {
+  background: var(--bg-0);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  padding: 8px 10px;
+  color: var(--ink);
+  font: inherit;
+}
+.eco-field input:focus { outline: none; border-color: var(--twin-glow); }
+.eco-drop {
+  border: 1px dashed var(--line);
+  border-radius: var(--r-sm);
+  padding: 20px;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  color: var(--muted); text-align: center;
+}
+.eco-drop > svg { color: var(--twin-glow); }
+.eco-help { font-size: 0.78rem; color: var(--muted); }
+.eco-help summary { cursor: pointer; color: var(--ink-2); }
+.eco-help code {
+  display: block;
+  background: var(--bg-0);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--r-sm);
+  padding: 8px;
+  margin: 6px 0;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--ink-2);
+  white-space: pre-wrap;
+}
+.eco-list-wrap {
+  background: var(--surface-2);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--r-md);
+  padding: 16px;
+}
+.eco-current { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.eco-current li {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 8px 10px;
+  background: var(--bg-0);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--r-sm);
+  font-size: 0.85rem;
+}
+.eco-remove {
+  width: 24px; height: 24px; border-radius: 999px;
+  background: transparent; border: 1px solid var(--line);
+  color: var(--muted); font-size: 1rem; line-height: 1;
+  display: grid; place-items: center;
+}
+.eco-remove:hover { color: var(--accent-warn); border-color: var(--accent-warn); }
+
+/* Let comparison table breathe in the workspace */
+.gw-content:has(.eco-compare), .gw-content:has(.eco-ingest) {
+  min-height: 0;
+  padding: 18px;
+}
