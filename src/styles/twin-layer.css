@@ -442,3 +442,70 @@ h1,h2,h3 { margin: 0; }
 .glance-item-text { display: flex; flex-direction: column; gap: 1px; flex: 1; min-width: 0; }
 .glance-item-label { font-size: 0.85rem; font-weight: 500; }
 .glance-item-sub { font-size: 0.72rem; color: var(--muted); }
+
+/* Glance workspace (sidebar + content) below the diagram */
+.glance-workspace {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: minmax(220px, 260px) 1fr;
+  gap: 16px;
+  background: var(--surface);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--r-lg);
+  padding: 16px;
+  backdrop-filter: var(--glass-blur);
+}
+.gw-sidebar {
+  background: var(--surface-2);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--r-md);
+  padding: 14px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.gw-eyebrow {
+  margin: 0 0 4px;
+  padding: 0 8px;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.gw-nav { display: flex; flex-direction: column; gap: 2px; }
+.gw-item {
+  display: flex; align-items: center; gap: 12px;
+  width: 100%; padding: 10px;
+  border-radius: var(--r-sm);
+  background: transparent; border: 0;
+  color: var(--ink-2); text-align: left;
+  transition: background 0.15s, color 0.15s;
+}
+.gw-item:hover { background: var(--surface-hi); color: var(--ink); }
+.gw-item-on {
+  background: var(--surface-hi);
+  color: var(--ink);
+  box-shadow: inset 2px 0 0 var(--twin-glow);
+}
+.gw-item-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px; border-radius: 8px;
+  background: var(--node-bg); color: var(--twin-glow); flex-shrink: 0;
+}
+.gw-item-text { display: flex; flex-direction: column; gap: 1px; flex: 1; min-width: 0; }
+.gw-item-title { font-size: 0.85rem; font-weight: 500; }
+.gw-item-sub { font-size: 0.72rem; color: var(--muted); }
+.gw-content {
+  background: var(--surface-2);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--r-md);
+  padding: 20px;
+  display: flex; flex-direction: column; gap: 10px;
+  min-height: 220px;
+}
+.gw-title { font-family: var(--font-display); font-size: 1.15rem; color: var(--ink); }
+.gw-body { color: var(--ink-2); font-size: 0.92rem; line-height: 1.5; margin: 0; }
+.gw-content .btn { align-self: flex-start; margin-top: auto; }
+@media (max-width: 720px) {
+  .glance-workspace { grid-template-columns: 1fr; }
+}
