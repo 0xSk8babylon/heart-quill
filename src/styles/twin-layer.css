@@ -84,7 +84,7 @@ h1,h2,h3 { margin: 0; }
 .brand-name { font-family: var(--font-display); font-weight: 800; letter-spacing: 0.14em; font-size: 0.92rem; }
 .brand-thin { font-weight: 500; opacity: 0.62; }
 
-.tabs { display: flex; gap: 6px; flex: 1; }
+.tabs { display: flex; gap: 6px; flex: 1; justify-content: center; }
 .tab {
   display: flex; align-items: center; gap: 12px;
   padding: 9px 16px; border-radius: 13px; border: 1px solid transparent;
