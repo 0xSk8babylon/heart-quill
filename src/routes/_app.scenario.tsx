@@ -9,9 +9,9 @@ import { useTwin } from "@/lib/twin-layer/store";
 export const Route = createFileRoute("/_app/scenario")({
   head: () => ({
     meta: [
-      { title: "Scenario Builder — Twin Layer" },
+      { title: "Plan — Twin Layer" },
       { name: "description", content: "Plan. Compare. Decide. Three energy pathways modeled from your home twin." },
-      { property: "og:title", content: "Scenario Builder — Twin Layer" },
+      { property: "og:title", content: "Plan — Twin Layer" },
       { property: "og:description", content: "Plan. Compare. Decide. Three energy pathways modeled from your home twin." },
     ],
   }),

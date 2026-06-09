@@ -6,9 +6,9 @@ import { useTwin } from "@/lib/twin-layer/store";
 export const Route = createFileRoute("/_app/progress")({
   head: () => ({
     meta: [
-      { title: "In Progress — Twin Layer" },
+      { title: "Build — Twin Layer" },
       { name: "description", content: "Contractor review lanes and activity for your shared home twin." },
-      { property: "og:title", content: "In Progress — Twin Layer" },
+      { property: "og:title", content: "Build — Twin Layer" },
       { property: "og:description", content: "Contractor review lanes and activity for your shared home twin." },
     ],
   }),
