@@ -94,7 +94,7 @@ export function InProgress({ onJump }: { onJump: () => void }) {
                 </div>
                 {isGate && lane.count > 0 ? (
                   <button className="btn btn-primary btn-wide" onClick={onJump}>
-                    <Icon name="check" size={16} />Resolve {lane.count} in Home Twin
+                    <Icon name="check" size={16} />Resolve {lane.count} in Home
                   </button>
                 ) : null}
               </article>
