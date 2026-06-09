@@ -1,6 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { ScenarioBuilder } from "@/components/twin-layer/ScenarioBuilder";
 import { RegistrySection } from "@/components/twin-layer/RegistryCard";
+import { GlanceWorkspace } from "@/components/twin-layer/GlanceWorkspace";
 import { HomeDiagram } from "@/components/twin-layer/HomeDiagram";
 import { StatusDot } from "@/components/twin-layer/atoms";
 import { SCENARIOS } from "@/lib/twin-layer/data";
@@ -39,7 +40,9 @@ function ScenarioPage() {
             <span><StatusDot status="not_added" />Not added yet</span>
           </div>
         </section>
+        <GlanceWorkspace onGoals={() => showToast("Goals & priorities — coming soon")} />
       </div>
+
 
       <ScenarioBuilder
         onShare={() => {
