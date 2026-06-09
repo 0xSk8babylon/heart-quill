@@ -671,20 +671,26 @@ h1,h2,h3 { margin: 0; }
   padding: 18px;
 }
 
-/* Scenario builder mini-menu overlay on the home diagram */
-.diagram-stage { position: relative; }
+/* Scenario builder side menu, sits to the left of the home diagram */
+.diagram-row {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 12px;
+  align-items: start;
+}
 .sb-menu {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  z-index: 5;
   background: var(--surface-2);
   backdrop-filter: var(--glass-blur);
   border: 1px solid var(--line);
-  border-radius: var(--r-sm);
-  padding: 8px;
-  min-width: 170px;
+  border-radius: var(--r-md);
+  padding: 10px;
   box-shadow: var(--shadow);
+  position: sticky;
+  top: 12px;
+}
+@media (max-width: 760px) {
+  .diagram-row { grid-template-columns: 1fr; }
+  .sb-menu { position: static; }
 }
 .sb-menu-title {
   display: flex; align-items: center; gap: 6px;
