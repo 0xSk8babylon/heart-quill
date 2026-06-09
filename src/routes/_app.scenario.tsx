@@ -10,10 +10,8 @@ export const Route = createFileRoute("/_app/scenario")({
   head: () => ({
     meta: [
       { title: "Plan — Twin Layer" },
-      { name: "description", content: "Compare scenarios for solar, battery, and panel upgrades against your home twin." },
-      { property: "og:title", content: "Plan — Twin Layer" },
       { name: "description", content: "Plan. Compare. Decide. Three energy pathways modeled from your home twin." },
-      { property: "og:title", content: "Scenario Builder — Twin Layer" },
+      { property: "og:title", content: "Plan — Twin Layer" },
       { property: "og:description", content: "Plan. Compare. Decide. Three energy pathways modeled from your home twin." },
     ],
   }),
