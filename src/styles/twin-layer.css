@@ -386,8 +386,10 @@ h1,h2,h3 { margin: 0; }
   .twin-grid { grid-template-columns: 1fr; }
   .hero-stage { min-height: 540px; }
   .progress-layout { grid-template-columns: 1fr; }
-  .scenario-grid { grid-template-columns: 1fr; }
   .tab-sub { display: none; }
+}
+@media (max-width: 640px) {
+  .scenario-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 720px) {
   .twin-status { grid-template-columns: repeat(2, 1fr); }
