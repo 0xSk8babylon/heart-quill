@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useNavigate } from "@tanstack/react-router";
 import { HOME } from "@/lib/twin-layer/data";
 import { useTwin } from "@/lib/twin-layer/store";
 import { DigitalTwin } from "./DigitalTwin";
@@ -9,12 +10,13 @@ import { SegBar, StatusDot } from "./atoms";
 const GLOW = "#8fb8d8";
 const ACCENT = "#e0913f";
 
-const GLANCE_ITEMS: Array<{ icon: IconName; label: string; sub: string; action: string }> = [
-  { icon: "spark", label: "Update your twin", sub: "Refresh facts & confirmations", action: "Twin updates — coming soon" },
-  { icon: "layers", label: "Explore future expansions", sub: "What's possible next", action: "Future expansions — coming soon" },
-  { icon: "shield", label: "Compare ecosystems", sub: "Side-by-side trade-offs", action: "Ecosystem comparison — coming soon" },
-  { icon: "target", label: "Set goals & priorities", sub: "Shape your plan", action: "goals" },
+const GLANCE_ITEMS: Array<{ key: "update" | "expand" | "compare" | "goals"; icon: IconName; label: string; sub: string }> = [
+  { key: "update", icon: "spark", label: "Update your twin", sub: "Refresh facts & confirmations" },
+  { key: "expand", icon: "layers", label: "Explore future expansions", sub: "What's possible next" },
+  { key: "compare", icon: "shield", label: "Compare ecosystems", sub: "Side-by-side trade-offs" },
+  { key: "goals", icon: "target", label: "Set goals & priorities", sub: "Shape your plan" },
 ];
+
 
 function AtAGlanceMenu({ onGoals, showToast }: { onGoals: () => void; showToast: (m: string) => void }) {
   const [open, setOpen] = useState(false);
