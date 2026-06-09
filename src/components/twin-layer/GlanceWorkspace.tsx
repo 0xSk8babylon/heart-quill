@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useRouterState } from "@tanstack/react-router";
 import { Icon, type IconName } from "./Icon";
 
 type GlanceKey = "update" | "expand" | "compare" | "goals";
