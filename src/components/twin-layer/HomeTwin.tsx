@@ -7,6 +7,26 @@ import { HomeDiagram } from "./HomeDiagram";
 import { Icon, type IconName } from "./Icon";
 import { SegBar, StatusDot } from "./atoms";
 
+function ScrollRevealTitle() {
+  const ref = useRef<HTMLHeadingElement>(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => setVisible(entry.isIntersecting),
+      { threshold: 0.4 },
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  return (
+    <h1 ref={ref} className={`hero-title hero-title-reveal ${visible ? "is-visible" : ""}`}>
+      Welcome<br />home,
+    </h1>
+  );
+}
+
 const GLOW = "#8fb8d8";
 const ACCENT = "#e0913f";
 
