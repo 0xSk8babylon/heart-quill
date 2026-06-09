@@ -426,3 +426,19 @@ h1,h2,h3 { margin: 0; }
 .registry-bullet { position: absolute; left: 0; top: 7px; width: 5px; height: 5px; border-radius: 999px; background: var(--line); }
 .registry-foot { padding-top: 10px; border-top: 1px solid var(--line-soft); }
 .registry-contractor { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.02em; text-transform: uppercase; }
+
+/* At-a-glance hidden menu */
+.glance { position: absolute; top: 18px; right: 18px; z-index: 20; }
+.glance-trigger { display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line-soft); color: var(--ink-2); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; backdrop-filter: var(--glass-blur); transition: color 0.2s, border-color 0.2s, background 0.2s; }
+.glance-trigger:hover, .glance-open .glance-trigger { color: var(--ink); border-color: var(--line); background: var(--surface-2); }
+.glance-trigger-dot { width: 6px; height: 6px; border-radius: 999px; background: var(--twin-glow); box-shadow: 0 0 8px var(--twin-glow); }
+.glance-panel { position: absolute; top: calc(100% + 10px); right: 0; width: 280px; background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--r-md); box-shadow: var(--shadow); padding: 14px; backdrop-filter: var(--glass-blur); animation: glance-in 0.18s ease-out; }
+@keyframes glance-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+.glance-eyebrow { margin: 0 0 8px; padding: 0 6px; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.glance-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.glance-item { display: flex; align-items: center; gap: 12px; width: 100%; padding: 10px; border-radius: var(--r-sm); background: transparent; border: 0; color: var(--ink); cursor: pointer; text-align: left; transition: background 0.15s; }
+.glance-item:hover { background: var(--surface-hi); }
+.glance-item-icon { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 8px; background: var(--node-bg); color: var(--twin-glow); flex-shrink: 0; }
+.glance-item-text { display: flex; flex-direction: column; gap: 1px; flex: 1; min-width: 0; }
+.glance-item-label { font-size: 0.85rem; font-weight: 500; }
+.glance-item-sub { font-size: 0.72rem; color: var(--muted); }
