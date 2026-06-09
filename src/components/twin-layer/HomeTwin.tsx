@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useNavigate } from "@tanstack/react-router";
 import { HOME } from "@/lib/twin-layer/data";
 import { useTwin } from "@/lib/twin-layer/store";
 import { DigitalTwin } from "./DigitalTwin";
@@ -9,16 +10,18 @@ import { SegBar, StatusDot } from "./atoms";
 const GLOW = "#8fb8d8";
 const ACCENT = "#e0913f";
 
-const GLANCE_ITEMS: Array<{ icon: IconName; label: string; sub: string; action: string }> = [
-  { icon: "spark", label: "Update your twin", sub: "Refresh facts & confirmations", action: "Twin updates — coming soon" },
-  { icon: "layers", label: "Explore future expansions", sub: "What's possible next", action: "Future expansions — coming soon" },
-  { icon: "shield", label: "Compare ecosystems", sub: "Side-by-side trade-offs", action: "Ecosystem comparison — coming soon" },
-  { icon: "target", label: "Set goals & priorities", sub: "Shape your plan", action: "goals" },
+const GLANCE_ITEMS: Array<{ key: "update" | "expand" | "compare" | "goals"; icon: IconName; label: string; sub: string }> = [
+  { key: "update", icon: "spark", label: "Update your twin", sub: "Refresh facts & confirmations" },
+  { key: "expand", icon: "layers", label: "Explore future expansions", sub: "What's possible next" },
+  { key: "compare", icon: "shield", label: "Compare ecosystems", sub: "Side-by-side trade-offs" },
+  { key: "goals", icon: "target", label: "Set goals & priorities", sub: "Shape your plan" },
 ];
 
-function AtAGlanceMenu({ onGoals, showToast }: { onGoals: () => void; showToast: (m: string) => void }) {
+
+function AtAGlanceMenu() {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!open) return;
@@ -45,14 +48,13 @@ function AtAGlanceMenu({ onGoals, showToast }: { onGoals: () => void; showToast:
           <p className="glance-eyebrow">At a glance</p>
           <ul className="glance-list">
             {GLANCE_ITEMS.map((item) => (
-              <li key={item.label}>
+              <li key={item.key}>
                 <button
                   className="glance-item"
                   role="menuitem"
                   onClick={() => {
                     setOpen(false);
-                    if (item.action === "goals") onGoals();
-                    else showToast(item.action);
+                    navigate({ to: "/scenario", hash: `glance-${item.key}` });
                   }}
                 >
                   <span className="glance-item-icon"><Icon name={item.icon} size={18} /></span>
@@ -70,6 +72,7 @@ function AtAGlanceMenu({ onGoals, showToast }: { onGoals: () => void; showToast:
     </div>
   );
 }
+
 
 function StatusItem({ icon, label, value, children }: {
   icon: IconName; label: string; value: string; children?: ReactNode;
@@ -99,7 +102,7 @@ export function HomeTwin({ onGoals }: { onGoals: () => void }) {
   return (
     <div className="twin-grid">
       <section className="hero-stage">
-        <AtAGlanceMenu onGoals={onGoals} showToast={showToast} />
+        <AtAGlanceMenu />
         <div className="twin-visual"><DigitalTwin glow={GLOW} accentWarn={ACCENT} dark /></div>
         <div className="hero-copy">
           <h1 className="hero-title">Welcome<br />home,</h1>
