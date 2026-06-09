@@ -102,7 +102,7 @@ export function HomeTwin({ onGoals }: { onGoals: () => void }) {
   return (
     <div className="twin-grid">
       <section className="hero-stage">
-        <AtAGlanceMenu onGoals={onGoals} showToast={showToast} />
+        <AtAGlanceMenu />
         <div className="twin-visual"><DigitalTwin glow={GLOW} accentWarn={ACCENT} dark /></div>
         <div className="hero-copy">
           <h1 className="hero-title">Welcome<br />home,</h1>
