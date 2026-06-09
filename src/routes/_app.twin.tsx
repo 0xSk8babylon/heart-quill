@@ -1,5 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { HomeTwin } from "@/components/twin-layer/HomeTwin";
+import { RegistrySection } from "@/components/twin-layer/RegistryCard";
 import { useTwin } from "@/lib/twin-layer/store";
 
 export const Route = createFileRoute("/_app/twin")({
@@ -18,11 +19,20 @@ function TwinPage() {
   const navigate = useNavigate();
   const { showToast } = useTwin();
   return (
-    <HomeTwin
-      onGoals={() => {
-        showToast("Let’s set your energy goals");
-        navigate({ to: "/scenario" });
-      }}
-    />
+    <>
+      <HomeTwin
+        onGoals={() => {
+          showToast("Let’s set your energy goals");
+          navigate({ to: "/scenario" });
+        }}
+      />
+      <RegistrySection
+        section="home"
+        eyebrow="More about your home"
+        title="Other home capabilities"
+        lede="Every card answers one homeowner question and shows where its data lives, what it isn't, and when it activates."
+        excludeIds={["energy-twin-overview", "single-line-diagram", "energy-passport"]}
+      />
+    </>
   );
 }

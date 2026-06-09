@@ -401,3 +401,21 @@ h1,h2,h3 { margin: 0; }
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; }
 }
+
+/* ============================ REGISTRY ============================ */
+.registry-section { margin: 32px 0 0; display: flex; flex-direction: column; gap: 16px; }
+.registry-section-head { display: flex; flex-direction: column; gap: 6px; }
+.registry-section-title { font-family: var(--font-display); font-size: 1.4rem; letter-spacing: -0.01em; color: var(--ink); margin: 0; }
+.registry-section-lede { color: var(--ink-2); font-size: 0.92rem; margin: 0; max-width: 720px; }
+.registry-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.registry-card { display: flex; flex-direction: column; gap: 12px; padding: 18px; border: 1px solid var(--line); border-radius: 16px; background: var(--bg-1); }
+.registry-card .card-head { align-items: flex-start; }
+.registry-tags { display: inline-flex; flex-wrap: wrap; gap: 6px; }
+.registry-question { display: inline-flex; align-items: flex-start; gap: 8px; color: var(--ink); font-weight: 600; font-size: 0.92rem; margin: 0; line-height: 1.4; }
+.registry-question svg { color: var(--muted); margin-top: 3px; flex-shrink: 0; }
+.registry-empty { color: var(--ink-2); font-size: 0.85rem; line-height: 1.5; margin: 0; }
+.registry-notes { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 7px; }
+.registry-notes li { position: relative; padding-left: 16px; font-size: 0.78rem; color: var(--muted); line-height: 1.45; }
+.registry-bullet { position: absolute; left: 0; top: 7px; width: 5px; height: 5px; border-radius: 999px; background: var(--line); }
+.registry-foot { padding-top: 10px; border-top: 1px solid var(--line-soft); }
+.registry-contractor { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.02em; text-transform: uppercase; }
