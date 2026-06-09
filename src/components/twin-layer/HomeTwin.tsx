@@ -3,7 +3,6 @@ import { HOME } from "@/lib/twin-layer/data";
 import { useTwin } from "@/lib/twin-layer/store";
 import { DigitalTwin } from "./DigitalTwin";
 import { HomeDiagram } from "./HomeDiagram";
-import { GlanceWorkspace } from "./GlanceWorkspace";
 import { Icon, type IconName } from "./Icon";
 import { SegBar, StatusDot } from "./atoms";
 
