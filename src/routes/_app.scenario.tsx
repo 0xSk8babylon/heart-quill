@@ -40,7 +40,9 @@ function ScenarioPage() {
             <span><StatusDot status="not_added" />Not added yet</span>
           </div>
         </section>
+        <GlanceWorkspace onGoals={() => showToast("Goals & priorities — coming soon")} />
       </div>
+
 
       <ScenarioBuilder
         onShare={() => {
