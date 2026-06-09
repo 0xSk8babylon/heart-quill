@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { HOME } from "@/lib/twin-layer/data";
 import { useTwin } from "@/lib/twin-layer/store";
 import { DigitalTwin } from "./DigitalTwin";
@@ -8,6 +8,68 @@ import { SegBar, StatusDot } from "./atoms";
 
 const GLOW = "#8fb8d8";
 const ACCENT = "#e0913f";
+
+const GLANCE_ITEMS: Array<{ icon: IconName; label: string; sub: string; action: string }> = [
+  { icon: "spark", label: "Update your twin", sub: "Refresh facts & confirmations", action: "Twin updates — coming soon" },
+  { icon: "layers", label: "Explore future expansions", sub: "What's possible next", action: "Future expansions — coming soon" },
+  { icon: "shield", label: "Compare ecosystems", sub: "Side-by-side trade-offs", action: "Ecosystem comparison — coming soon" },
+  { icon: "target", label: "Set goals & priorities", sub: "Shape your plan", action: "goals" },
+];
+
+function AtAGlanceMenu({ onGoals, showToast }: { onGoals: () => void; showToast: (m: string) => void }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const onDoc = (e: MouseEvent) => {
+      if (!ref.current?.contains(e.target as Node)) setOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
+    document.addEventListener("mousedown", onDoc);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onDoc);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
+  return (
+    <div className={`glance ${open ? "glance-open" : ""}`} ref={ref}>
+      <button className="glance-trigger" onClick={() => setOpen((v) => !v)} aria-expanded={open} aria-haspopup="menu">
+        <span className="glance-trigger-dot" />
+        <span className="glance-trigger-label">at a glance</span>
+      </button>
+      {open ? (
+        <div className="glance-panel" role="menu">
+          <p className="glance-eyebrow">At a glance</p>
+          <ul className="glance-list">
+            {GLANCE_ITEMS.map((item) => (
+              <li key={item.label}>
+                <button
+                  className="glance-item"
+                  role="menuitem"
+                  onClick={() => {
+                    setOpen(false);
+                    if (item.action === "goals") onGoals();
+                    else showToast(item.action);
+                  }}
+                >
+                  <span className="glance-item-icon"><Icon name={item.icon} size={18} /></span>
+                  <span className="glance-item-text">
+                    <span className="glance-item-label">{item.label}</span>
+                    <span className="glance-item-sub">{item.sub}</span>
+                  </span>
+                  <Icon name="arrow" size={16} />
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
+    </div>
+  );
+}
 
 function StatusItem({ icon, label, value, children }: {
   icon: IconName; label: string; value: string; children?: ReactNode;
@@ -37,6 +99,7 @@ export function HomeTwin({ onGoals }: { onGoals: () => void }) {
   return (
     <div className="twin-grid">
       <section className="hero-stage">
+        <AtAGlanceMenu onGoals={onGoals} showToast={showToast} />
         <div className="twin-visual"><DigitalTwin glow={GLOW} accentWarn={ACCENT} dark /></div>
         <div className="hero-copy">
           <h1 className="hero-title">Welcome<br />home,</h1>
