@@ -6,9 +6,9 @@ import { useTwin } from "@/lib/twin-layer/store";
 export const Route = createFileRoute("/_app/twin")({
   head: () => ({
     meta: [
-      { title: "Home Twin — Twin Layer" },
+      { title: "Home — Twin Layer" },
       { name: "description", content: "Your residential energy digital twin — solar, battery, panel, and more in one live diagram." },
-      { property: "og:title", content: "Home Twin — Twin Layer" },
+      { property: "og:title", content: "Home — Twin Layer" },
       { property: "og:description", content: "Your residential energy digital twin — live home diagram and energy passport." },
     ],
   }),
