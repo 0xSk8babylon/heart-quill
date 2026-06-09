@@ -101,14 +101,16 @@ export function HomeTwin({ onGoals }: { onGoals: () => void }) {
 
   return (
     <div className="twin-grid">
-      <section className="hero-stage">
-        <AtAGlanceMenu />
-        <div className="twin-visual"><DigitalTwin glow={GLOW} accentWarn={ACCENT} dark /></div>
-        <div className="hero-copy">
-          <h1 className="hero-title">Welcome<br />home,</h1>
-        </div>
+      <div className="hero-column">
+        <section className="hero-stage">
+          <AtAGlanceMenu />
+          <div className="twin-visual"><DigitalTwin glow={GLOW} accentWarn={ACCENT} dark /></div>
+          <div className="hero-copy">
+            <h1 className="hero-title">Welcome<br />home,</h1>
+          </div>
+        </section>
 
-        <div className="twin-status">
+        <div className="twin-status twin-status-below">
           <StatusItem icon="shield" label="Data confidence" value={confidenceLabel}>
             <SegBar value={confidencePct} tone="ok" />
           </StatusItem>
@@ -119,8 +121,7 @@ export function HomeTwin({ onGoals }: { onGoals: () => void }) {
             <span className="status-note">{needs ? "needs your confirmation" : "all systems confirmed"}</span>
           </StatusItem>
         </div>
-
-      </section>
+      </div>
 
       <aside className="rail">
         <section className="card">
