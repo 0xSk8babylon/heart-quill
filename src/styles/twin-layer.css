@@ -16,20 +16,25 @@
 :root[data-density="comfy"] { --pad: 28px; }
 
 :root[data-theme="dark"] {
-  --bg-0: #0e1115; --bg-1: #161a1f;
-  --grad: radial-gradient(120% 90% at 22% 8%, rgba(143,184,216,0.10), transparent 46%),
-          radial-gradient(90% 80% at 96% 4%, rgba(224,145,63,0.06), transparent 50%),
-          linear-gradient(168deg, #11151a 0%, #0e1115 60%, #0b0e11 100%);
-  --surface: rgba(255,255,255,0.040);
-  --surface-2: rgba(255,255,255,0.065);
-  --surface-hi: rgba(255,255,255,0.09);
-  --line: rgba(255,255,255,0.11);
-  --line-soft: rgba(255,255,255,0.06);
-  --ink: #eaeef1; --ink-2: #b3bdc3; --muted: #79858d;
+  --bg-0: hsl(var(--background));
+  --bg-1: hsl(var(--card));
+  --grad: radial-gradient(120% 90% at 22% 8%, hsl(var(--primary) / 0.10), transparent 46%),
+          radial-gradient(90% 80% at 96% 4%, hsl(var(--accent) / 0.06), transparent 50%),
+          linear-gradient(168deg, hsl(var(--card)) 0%, hsl(var(--background)) 60%, hsl(var(--background)) 100%);
+  --surface: hsl(var(--secondary) / 0.35);
+  --surface-2: hsl(var(--secondary) / 0.7);
+  --surface-hi: hsl(var(--secondary));
+  --line: hsl(var(--foreground) / 0.11);
+  --line-soft: hsl(var(--foreground) / 0.06);
+  --ink: hsl(var(--foreground));
+  --ink-2: hsl(var(--foreground) / 0.72);
+  --muted: hsl(var(--muted-foreground));
   --ok: #5dba88; --off: #717b83;
   --shadow: 0 24px 70px rgba(0,0,0,0.45);
-  --node-bg: rgba(255,255,255,0.05);
+  --node-bg: hsl(var(--foreground) / 0.05);
   --glass-blur: blur(16px);
+  --twin-glow: hsl(var(--primary));
+  --accent-warn: hsl(var(--accent));
 }
 :root[data-theme="light"] {
   --bg-0: #ece5d6; --bg-1: #f6f2e9;
