@@ -179,7 +179,7 @@ h1,h2,h3 { margin: 0; }
 .twin-grid { display: grid; grid-template-columns: minmax(0,1.62fr) minmax(330px, 0.92fr); gap: clamp(16px, 1.8vw, 24px); align-items: start; }
 
 .hero-stage {
-  position: relative; min-height: 660px; border-radius: var(--r-lg); overflow: hidden;
+  position: relative; min-height: 540px; border-radius: var(--r-lg); overflow: hidden;
   border: 1px solid var(--line); box-shadow: var(--shadow);
   background:
     radial-gradient(80% 60% at 60% 40%, color-mix(in srgb, var(--twin-glow) 9%, transparent), transparent 70%),
