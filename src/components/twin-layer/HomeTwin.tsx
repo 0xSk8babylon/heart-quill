@@ -140,7 +140,9 @@ export function HomeTwin({ onGoals }: { onGoals: () => void }) {
             <span><StatusDot status="needs_confirmation" />Needs confirmation</span>
             <span><StatusDot status="not_added" />Not added yet</span>
           </div>
+          <GlanceWorkspace onGoals={onGoals} />
         </section>
+
 
         <section className="card passport">
           <div className="card-head">
