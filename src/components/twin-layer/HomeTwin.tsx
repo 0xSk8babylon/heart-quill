@@ -18,9 +18,10 @@ const GLANCE_ITEMS: Array<{ key: "update" | "expand" | "compare" | "goals"; icon
 ];
 
 
-function AtAGlanceMenu({ onGoals, showToast }: { onGoals: () => void; showToast: (m: string) => void }) {
+function AtAGlanceMenu() {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!open) return;
@@ -47,14 +48,13 @@ function AtAGlanceMenu({ onGoals, showToast }: { onGoals: () => void; showToast:
           <p className="glance-eyebrow">At a glance</p>
           <ul className="glance-list">
             {GLANCE_ITEMS.map((item) => (
-              <li key={item.label}>
+              <li key={item.key}>
                 <button
                   className="glance-item"
                   role="menuitem"
                   onClick={() => {
                     setOpen(false);
-                    if (item.action === "goals") onGoals();
-                    else showToast(item.action);
+                    navigate({ to: "/scenario", hash: `glance-${item.key}` });
                   }}
                 >
                   <span className="glance-item-icon"><Icon name={item.icon} size={18} /></span>
@@ -72,6 +72,7 @@ function AtAGlanceMenu({ onGoals, showToast }: { onGoals: () => void; showToast:
     </div>
   );
 }
+
 
 function StatusItem({ icon, label, value, children }: {
   icon: IconName; label: string; value: string; children?: ReactNode;
