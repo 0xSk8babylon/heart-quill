@@ -13,12 +13,21 @@ function ScrollRevealTitle() {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    let hideTimer: number | null = null;
     const obs = new IntersectionObserver(
-      ([entry]) => setVisible(entry.isIntersecting),
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          if (hideTimer) { window.clearTimeout(hideTimer); hideTimer = null; }
+          setVisible(true);
+        } else {
+          if (hideTimer) window.clearTimeout(hideTimer);
+          hideTimer = window.setTimeout(() => setVisible(false), 3000);
+        }
+      },
       { threshold: 0.4 },
     );
     obs.observe(el);
-    return () => obs.disconnect();
+    return () => { obs.disconnect(); if (hideTimer) window.clearTimeout(hideTimer); };
   }, []);
   return (
     <h1 ref={ref} className={`hero-title hero-title-reveal ${visible ? "is-visible" : ""}`}>
