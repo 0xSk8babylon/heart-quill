@@ -41,9 +41,21 @@ const CONTENT: Record<GlanceKey, { eyebrow: string; title: string; body: string;
 export function GlanceWorkspace({ onGoals }: { onGoals: () => void }) {
   const [active, setActive] = useState<GlanceKey>("update");
   const content = CONTENT[active];
+  const hash = useRouterState({ select: (s) => s.location.hash });
+  const rootRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (!hash?.startsWith("glance-")) return;
+    const key = hash.slice("glance-".length) as GlanceKey;
+    if (ITEMS.some((i) => i.key === key)) {
+      setActive(key);
+      rootRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [hash]);
 
   return (
-    <section className="glance-workspace">
+    <section className="glance-workspace" ref={rootRef}>
+
       <aside className="gw-sidebar" aria-label="At a glance menu">
         <p className="gw-eyebrow">At a glance</p>
         <nav className="gw-nav">
