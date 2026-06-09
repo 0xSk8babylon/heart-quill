@@ -534,9 +534,6 @@ h1,h2,h3 { margin: 0; }
 }
 .eco-row > .eco-col { background: var(--surface-2); padding: 10px; min-width: 0; }
 .eco-row-head > .eco-col {
-}
-.eco-row > .eco-col { background: var(--surface-2); padding: 12px; min-width: 0; }
-.eco-row-head > .eco-col {
   background: var(--surface-hi);
   font-size: 0.72rem;
   letter-spacing: 0.08em;
