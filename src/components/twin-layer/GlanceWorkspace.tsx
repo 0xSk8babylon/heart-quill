@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useRouterState } from "@tanstack/react-router";
 import { Icon, type IconName } from "./Icon";
+import { EcosystemComparison } from "./EcosystemComparison";
+import { EcosystemIngest } from "./EcosystemIngest";
 
 type GlanceKey = "update" | "expand" | "compare" | "goals";
 
