@@ -447,13 +447,16 @@ h1,h2,h3 { margin: 0; }
 .glance-workspace {
   margin-top: 18px;
   display: grid;
-  grid-template-columns: minmax(220px, 260px) 1fr;
-  gap: 16px;
+  grid-template-columns: 150px 1fr;
+  gap: 12px;
   background: var(--surface);
   border: 1px solid var(--line-soft);
   border-radius: var(--r-lg);
-  padding: 16px;
+  padding: 12px;
   backdrop-filter: var(--glass-blur);
+}
+.gw-content:has(.eco-compare) {
+  padding: 14px;
 }
 .gw-sidebar {
   background: var(--surface-2);
