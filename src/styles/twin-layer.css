@@ -729,3 +729,26 @@ h1,h2,h3 { margin: 0; }
 .sb-menu-text { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
 .sb-menu-label { font: 600 12px/1.1 var(--font-body); }
 .sb-menu-sub { font: 400 10px/1.2 var(--font-body); color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* Stack scenario + ecosystem menus on the diagram's left rail */
+.diagram-side { display: flex; flex-direction: column; gap: 10px; position: sticky; top: 12px; }
+.diagram-row > .diagram-side .sb-menu { position: static; }
+.sb-menu-swatch {
+  width: 16px; height: 16px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 1px var(--line) inset, 0 0 8px color-mix(in oklab, currentColor 30%, transparent);
+}
+/* Ecosystem overlay lines on the diagram */
+.edge-overlay {
+  stroke-width: 0.9;
+  stroke-linecap: round;
+  stroke-dasharray: 2 1.5;
+  vector-effect: non-scaling-stroke;
+  filter: drop-shadow(0 0 4px currentColor);
+  opacity: 0.95;
+  animation: edge-dash 1.2s linear infinite;
+}
+@keyframes edge-dash {
+  to { stroke-dashoffset: -10; }
+}

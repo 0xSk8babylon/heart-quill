@@ -2,15 +2,23 @@ import { useMemo } from "react";
 import { EDGES, STATUS, type NodeModel } from "@/lib/twin-layer/data";
 import { Icon } from "./Icon";
 
+export type EcoOverlay = {
+  color: string;
+  /** node ids to highlight via lines from the hub */
+  nodeIds: string[];
+};
+
 export function HomeDiagram({
-  nodes, selectedId, onSelect, compact = false,
+  nodes, selectedId, onSelect, compact = false, overlay,
 }: {
   nodes: NodeModel[];
   selectedId: string | null;
   onSelect: (id: string) => void;
   compact?: boolean;
+  overlay?: EcoOverlay;
 }) {
   const byId = useMemo(() => Object.fromEntries(nodes.map((n) => [n.id, n])), [nodes]);
+  const hub = useMemo(() => nodes.find((n) => n.hub) ?? null, [nodes]);
 
   return (
     <div className={`diagram ${compact ? "diagram-compact" : ""}`}>
@@ -26,6 +34,23 @@ export function HomeDiagram({
               className={`edge edge-${tone} ${active ? "edge-active" : ""}`} />
           );
         })}
+        {overlay && hub
+          ? overlay.nodeIds.map((id) => {
+              const target = byId[id];
+              if (!target || target.id === hub.id) return null;
+              return (
+                <line
+                  key={`overlay-${id}`}
+                  x1={hub.x}
+                  y1={hub.y}
+                  x2={target.x}
+                  y2={target.y}
+                  className="edge-overlay"
+                  stroke={overlay.color}
+                />
+              );
+            })
+          : null}
       </svg>
 
       {nodes.map((n) => {
