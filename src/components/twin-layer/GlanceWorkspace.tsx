@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useRouterState } from "@tanstack/react-router";
 import { Icon, type IconName } from "./Icon";
+import { EcosystemComparison } from "./EcosystemComparison";
+import { EcosystemIngest } from "./EcosystemIngest";
 
 type GlanceKey = "update" | "expand" | "compare" | "goals";
 
@@ -81,13 +83,22 @@ export function GlanceWorkspace({ onGoals }: { onGoals: () => void }) {
       </aside>
 
       <div className="gw-content">
-        <p className="eyebrow">{content.eyebrow}</p>
-        <h3 className="gw-title">{content.title}</h3>
-        <p className="gw-body">{content.body}</p>
-        <button className="btn" onClick={active === "goals" ? onGoals : undefined}>
-          {content.cta} <Icon name="arrow" size={16} />
-        </button>
+        {active === "compare" ? (
+          <EcosystemComparison />
+        ) : active === "update" ? (
+          <EcosystemIngest />
+        ) : (
+          <>
+            <p className="eyebrow">{content.eyebrow}</p>
+            <h3 className="gw-title">{content.title}</h3>
+            <p className="gw-body">{content.body}</p>
+            <button className="btn" onClick={active === "goals" ? onGoals : undefined}>
+              {content.cta} <Icon name="arrow" size={16} />
+            </button>
+          </>
+        )}
       </div>
     </section>
   );
 }
+
