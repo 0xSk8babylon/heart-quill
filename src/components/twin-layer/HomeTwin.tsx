@@ -106,7 +106,7 @@ export function HomeTwin({ onGoals }: { onGoals: () => void }) {
           <AtAGlanceMenu />
           <div className="twin-visual"><DigitalTwin glow={GLOW} accentWarn={ACCENT} dark /></div>
           <div className="hero-copy">
-            <h1 className="hero-title">Welcome<br />home,</h1>
+            <ScrollRevealTitle />
           </div>
         </section>
 
