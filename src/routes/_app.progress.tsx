@@ -1,5 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { InProgress } from "@/components/twin-layer/InProgress";
+import { RegistrySection } from "@/components/twin-layer/RegistryCard";
 import { useTwin } from "@/lib/twin-layer/store";
 
 export const Route = createFileRoute("/_app/progress")({
@@ -18,11 +19,22 @@ function ProgressPage() {
   const navigate = useNavigate();
   const { showToast } = useTwin();
   return (
-    <InProgress
-      onJump={() => {
-        showToast("Open a flagged system to confirm it");
-        navigate({ to: "/twin" });
-      }}
-    />
+    <>
+      <InProgress
+        onJump={() => {
+          showToast("Open a flagged system to confirm it");
+          navigate({ to: "/twin" });
+        }}
+      />
+      <div className="tab-wrap">
+        <RegistrySection
+          section="build"
+          eyebrow="More build surfaces"
+          title="Other build capabilities"
+          lede="Readiness lenses that come online once contractor, estimate, and program context are sufficient."
+          excludeIds={["contractor-context", "estimate-readiness", "proposal-options"]}
+        />
+      </div>
+    </>
   );
 }
