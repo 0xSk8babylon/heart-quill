@@ -190,6 +190,8 @@ h1,h2,h3 { margin: 0; }
 
 .hero-copy { position: absolute; top: clamp(28px, 4vw, 52px); left: clamp(28px, 4vw, 52px); z-index: 2; }
 .hero-title { font-family: var(--font-display); font-weight: 800; text-transform: uppercase; letter-spacing: 0.01em; line-height: 0.9; font-size: clamp(2.8rem, 5.4vw, 4.6rem); color: var(--ink); text-shadow: 0 6px 40px color-mix(in srgb, var(--bg-0) 70%, transparent); }
+.hero-title-reveal { opacity: 0; transform: translateY(14px); transition: opacity .55s ease, transform .55s ease; }
+.hero-title-reveal.is-visible { opacity: 1; transform: translateY(0); }
 .hero-sub { font-family: var(--font-display); font-weight: 500; text-transform: uppercase; letter-spacing: 0.16em; font-size: clamp(0.95rem, 1.4vw, 1.2rem); color: var(--ink-2); margin: 14px 0 0; }
 .hero-script { display: inline-block; font-family: var(--font-script); font-size: clamp(2.4rem, 3.6vw, 3.2rem); color: var(--twin-glow); margin-top: 6px; line-height: 1; }
 
