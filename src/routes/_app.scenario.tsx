@@ -1,19 +1,35 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { ScenarioBuilder } from "@/components/twin-layer/ScenarioBuilder";
 import { RegistrySection } from "@/components/twin-layer/RegistryCard";
 import { GlanceWorkspace } from "@/components/twin-layer/GlanceWorkspace";
-import { HomeDiagram } from "@/components/twin-layer/HomeDiagram";
+import { HomeDiagram, type EcoOverlay } from "@/components/twin-layer/HomeDiagram";
 import { StatusDot } from "@/components/twin-layer/atoms";
 import { SCENARIOS } from "@/lib/twin-layer/data";
 import { Icon } from "@/components/twin-layer/Icon";
 import { useTwin } from "@/lib/twin-layer/store";
+import { useEcosystems } from "@/lib/twin-layer/ecosystem-store";
+import type { Product } from "@/lib/twin-layer/ecosystems";
 
 const SCENARIO_NODES: Record<string, string[]> = {
   "sc-critical": ["solar", "panel", "battery", "backup"],
   "sc-balanced": ["solar", "utility", "meter", "panel", "battery", "backup", "ev"],
   "sc-future": ["solar", "utility", "meter", "panel", "battery", "backup", "ev", "generator"],
 };
+
+const ECO_COLORS = ["#5dba88", "#5b9bd5", "#e0913f", "#c084fc", "#f472b6"];
+
+function productToNodeId(p: Product): string | null {
+  switch (p.category) {
+    case "solar": return "solar";
+    case "inverter": return "solar";
+    case "battery": return "battery";
+    case "generator": return "generator";
+    case "smart-panel": return "panel";
+    case "panel": return "panel";
+    default: return null;
+  }
+}
 
 export const Route = createFileRoute("/_app/scenario")({
   head: () => ({
