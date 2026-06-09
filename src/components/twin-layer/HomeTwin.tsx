@@ -16,12 +16,12 @@ function ScrollRevealTitle() {
     let hideTimer: number | null = null;
     const obs = new IntersectionObserver(
       ([entry]) => {
+        if (hideTimer) { window.clearTimeout(hideTimer); hideTimer = null; }
         if (entry.isIntersecting) {
-          if (hideTimer) { window.clearTimeout(hideTimer); hideTimer = null; }
           setVisible(true);
-        } else {
-          if (hideTimer) window.clearTimeout(hideTimer);
           hideTimer = window.setTimeout(() => setVisible(false), 3000);
+        } else {
+          setVisible(false);
         }
       },
       { threshold: 0.4 },
