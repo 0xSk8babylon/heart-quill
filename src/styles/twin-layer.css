@@ -670,3 +670,56 @@ h1,h2,h3 { margin: 0; }
   min-height: 0;
   padding: 18px;
 }
+
+/* Scenario builder mini-menu overlay on the home diagram */
+.diagram-stage { position: relative; }
+.sb-menu {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 5;
+  background: var(--surface-2);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  padding: 8px;
+  min-width: 170px;
+  box-shadow: var(--shadow);
+}
+.sb-menu-title {
+  display: flex; align-items: center; gap: 6px;
+  font: 600 10px/1 var(--font-display);
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--ink-2);
+  margin: 2px 4px 6px;
+}
+.sb-menu-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.sb-menu-item {
+  width: 100%;
+  display: flex; align-items: center; gap: 8px;
+  padding: 6px 8px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: var(--ink);
+  cursor: pointer;
+  text-align: left;
+  transition: background 120ms ease, border-color 120ms ease;
+}
+.sb-menu-item:hover { background: var(--surface); }
+.sb-menu-item-active {
+  background: var(--surface-hi);
+  border-color: var(--line);
+}
+.sb-menu-num {
+  width: 20px; height: 20px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 6px;
+  background: hsl(var(--primary) / 0.15);
+  color: hsl(var(--primary));
+  font: 600 11px/1 var(--font-mono);
+  flex-shrink: 0;
+}
+.sb-menu-text { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.sb-menu-label { font: 600 12px/1.1 var(--font-body); }
+.sb-menu-sub { font: 400 10px/1.2 var(--font-body); color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
