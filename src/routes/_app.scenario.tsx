@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { ScenarioBuilder } from "@/components/twin-layer/ScenarioBuilder";
+import { GlanceWorkspace } from "@/components/twin-layer/GlanceWorkspace";
 import { RegistrySection } from "@/components/twin-layer/RegistryCard";
 
 import { HomeDiagram, type EcoOverlay } from "@/components/twin-layer/HomeDiagram";
