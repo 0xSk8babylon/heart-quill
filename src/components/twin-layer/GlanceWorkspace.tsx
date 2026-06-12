@@ -40,8 +40,9 @@ const CONTENT: Record<GlanceKey, { eyebrow: string; title: string; body: string;
   },
 };
 
-export function GlanceWorkspace({ onGoals }: { onGoals: () => void }) {
-  const [active, setActive] = useState<GlanceKey>("update");
+export function GlanceWorkspace({ onGoals, items }: { onGoals: () => void; items?: GlanceKey[] }) {
+  const ITEMS = items ? ALL_ITEMS.filter((i) => items.includes(i.key)) : ALL_ITEMS;
+  const [active, setActive] = useState<GlanceKey>(ITEMS[0]?.key ?? "update");
   const content = CONTENT[active];
   const hash = useRouterState({ select: (s) => s.location.hash });
   const rootRef = useRef<HTMLElement>(null);
