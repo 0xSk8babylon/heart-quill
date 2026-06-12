@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { ScenarioBuilder } from "@/components/twin-layer/ScenarioBuilder";
 import { RegistrySection } from "@/components/twin-layer/RegistryCard";
-import { GlanceWorkspace } from "@/components/twin-layer/GlanceWorkspace";
+
 import { HomeDiagram, type EcoOverlay } from "@/components/twin-layer/HomeDiagram";
 import { StatusDot } from "@/components/twin-layer/atoms";
 import { SCENARIOS } from "@/lib/twin-layer/data";
@@ -135,7 +135,6 @@ function ScenarioPage() {
             </div>
           </section>
         </div>
-        <GlanceWorkspace onGoals={() => showToast("Goals & priorities — coming soon")} />
       </div>
 
 
