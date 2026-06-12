@@ -15,6 +15,7 @@ import { Route as AppTwinRouteImport } from './routes/_app.twin'
 import { Route as AppScenarioRouteImport } from './routes/_app.scenario'
 import { Route as AppProgressRouteImport } from './routes/_app.progress'
 import { Route as AppInternalRouteImport } from './routes/_app.internal'
+import { Route as AppExploreRouteImport } from './routes/_app.explore'
 
 const AppRoute = AppRouteImport.update({
   id: '/_app',
@@ -45,9 +46,15 @@ const AppInternalRoute = AppInternalRouteImport.update({
   path: '/internal',
   getParentRoute: () => AppRoute,
 } as any)
+const AppExploreRoute = AppExploreRouteImport.update({
+  id: '/explore',
+  path: '/explore',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/explore': typeof AppExploreRoute
   '/internal': typeof AppInternalRoute
   '/progress': typeof AppProgressRoute
   '/scenario': typeof AppScenarioRoute
@@ -55,6 +62,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/explore': typeof AppExploreRoute
   '/internal': typeof AppInternalRoute
   '/progress': typeof AppProgressRoute
   '/scenario': typeof AppScenarioRoute
@@ -64,6 +72,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
+  '/_app/explore': typeof AppExploreRoute
   '/_app/internal': typeof AppInternalRoute
   '/_app/progress': typeof AppProgressRoute
   '/_app/scenario': typeof AppScenarioRoute
@@ -71,13 +80,20 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/internal' | '/progress' | '/scenario' | '/twin'
+  fullPaths:
+    | '/'
+    | '/explore'
+    | '/internal'
+    | '/progress'
+    | '/scenario'
+    | '/twin'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/internal' | '/progress' | '/scenario' | '/twin'
+  to: '/' | '/explore' | '/internal' | '/progress' | '/scenario' | '/twin'
   id:
     | '__root__'
     | '/'
     | '/_app'
+    | '/_app/explore'
     | '/_app/internal'
     | '/_app/progress'
     | '/_app/scenario'
@@ -133,10 +149,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppInternalRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/explore': {
+      id: '/_app/explore'
+      path: '/explore'
+      fullPath: '/explore'
+      preLoaderRoute: typeof AppExploreRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
 interface AppRouteChildren {
+  AppExploreRoute: typeof AppExploreRoute
   AppInternalRoute: typeof AppInternalRoute
   AppProgressRoute: typeof AppProgressRoute
   AppScenarioRoute: typeof AppScenarioRoute
@@ -144,6 +168,7 @@ interface AppRouteChildren {
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppExploreRoute: AppExploreRoute,
   AppInternalRoute: AppInternalRoute,
   AppProgressRoute: AppProgressRoute,
   AppScenarioRoute: AppScenarioRoute,
