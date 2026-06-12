@@ -4,9 +4,9 @@ import { Icon, type IconName } from "./Icon";
 import { EcosystemComparison } from "./EcosystemComparison";
 import { EcosystemIngest } from "./EcosystemIngest";
 
-type GlanceKey = "update" | "expand" | "compare" | "goals";
+export type GlanceKey = "update" | "expand" | "compare" | "goals";
 
-const ITEMS: Array<{ key: GlanceKey; icon: IconName; title: string; sub: string }> = [
+const ALL_ITEMS: Array<{ key: GlanceKey; icon: IconName; title: string; sub: string }> = [
   { key: "update", icon: "spark", title: "Update", sub: "Refresh facts & confirmations" },
   { key: "expand", icon: "layers", title: "Explore", sub: "What's possible next" },
   { key: "compare", icon: "shield", title: "Compare", sub: "Side-by-side trade-offs" },
