@@ -148,6 +148,14 @@ function ScenarioPage() {
       />
 
       <div className="tab-wrap">
+        <GlanceWorkspace
+          items={["compare", "goals"]}
+          onGoals={() => showToast("Let’s shape your plan")}
+        />
+      </div>
+
+
+      <div className="tab-wrap">
         <RegistrySection
           section="planner"
           eyebrow="More planning surfaces"
