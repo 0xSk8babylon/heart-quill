@@ -4,9 +4,9 @@ import { Icon, type IconName } from "./Icon";
 import { EcosystemComparison } from "./EcosystemComparison";
 import { EcosystemIngest } from "./EcosystemIngest";
 
-type GlanceKey = "update" | "expand" | "compare" | "goals";
+export type GlanceKey = "update" | "expand" | "compare" | "goals";
 
-const ITEMS: Array<{ key: GlanceKey; icon: IconName; title: string; sub: string }> = [
+const ALL_ITEMS: Array<{ key: GlanceKey; icon: IconName; title: string; sub: string }> = [
   { key: "update", icon: "spark", title: "Update", sub: "Refresh facts & confirmations" },
   { key: "expand", icon: "layers", title: "Explore", sub: "What's possible next" },
   { key: "compare", icon: "shield", title: "Compare", sub: "Side-by-side trade-offs" },
@@ -40,8 +40,9 @@ const CONTENT: Record<GlanceKey, { eyebrow: string; title: string; body: string;
   },
 };
 
-export function GlanceWorkspace({ onGoals }: { onGoals: () => void }) {
-  const [active, setActive] = useState<GlanceKey>("update");
+export function GlanceWorkspace({ onGoals, items }: { onGoals: () => void; items?: GlanceKey[] }) {
+  const ITEMS = items ? ALL_ITEMS.filter((i) => items.includes(i.key)) : ALL_ITEMS;
+  const [active, setActive] = useState<GlanceKey>(ITEMS[0]?.key ?? "update");
   const content = CONTENT[active];
   const hash = useRouterState({ select: (s) => s.location.hash });
   const rootRef = useRef<HTMLElement>(null);

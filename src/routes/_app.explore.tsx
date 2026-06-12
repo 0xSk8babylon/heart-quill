@@ -29,6 +29,7 @@ function ExplorePage() {
         </div>
       </header>
       <GlanceWorkspace
+        items={["update", "expand"]}
         onGoals={() => {
           showToast("Let’s set your energy goals");
           navigate({ to: "/scenario" });

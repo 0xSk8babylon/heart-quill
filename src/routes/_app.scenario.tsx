@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { ScenarioBuilder } from "@/components/twin-layer/ScenarioBuilder";
+import { GlanceWorkspace } from "@/components/twin-layer/GlanceWorkspace";
 import { RegistrySection } from "@/components/twin-layer/RegistryCard";
 
 import { HomeDiagram, type EcoOverlay } from "@/components/twin-layer/HomeDiagram";
@@ -145,6 +146,14 @@ function ScenarioPage() {
           navigate({ to: "/progress" });
         }}
       />
+
+      <div className="tab-wrap">
+        <GlanceWorkspace
+          items={["compare", "goals"]}
+          onGoals={() => showToast("Let’s shape your plan")}
+        />
+      </div>
+
 
       <div className="tab-wrap">
         <RegistrySection
