@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Route as CapabilitiesRoute } from "./_app.capabilities";
+import { CapabilitiesPage } from "@/components/twin-layer/CapabilitiesPage";
 
 // Internal/developer alias for the capabilities registry.
 // Homeowner-facing nav no longer surfaces this page; it's kept here as a
@@ -16,5 +16,5 @@ export const Route = createFileRoute("/_app/internal_/capabilities")({
       { name: "robots", content: "noindex" },
     ],
   }),
-  component: CapabilitiesRoute.options.component!,
+  component: CapabilitiesPage,
 });
