@@ -917,7 +917,7 @@ h1,h2,h3 { margin: 0; }
 .maturity-card { padding: 18px; margin-top: 8px; }
 .maturity-strip { list-style: none; padding: 0; margin: 12px 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
 .maturity-step { display: flex; gap: 10px; align-items: flex-start; padding: 10px 12px; border: 1px solid var(--line-soft); border-radius: 10px; background: var(--surface); }
-.maturity-num { width: 22px; height: 22px; border-radius: 50%; background: var(--twin-glow); color: var(--bg); display: grid; place-items: center; font-size: 0.74rem; font-weight: 700; flex: none; }
+.maturity-num { width: 22px; height: 22px; border-radius: 50%; background: var(--twin-glow); color: var(--bg-0); display: grid; place-items: center; font-size: 0.74rem; font-weight: 700; flex: none; }
 .maturity-label { margin: 0; font-weight: 600; color: var(--ink); font-size: 0.86rem; }
 .maturity-meaning { margin: 2px 0 4px; color: var(--ink-2); font-size: 0.78rem; line-height: 1.4; }
 .maturity-page { margin: 0; color: var(--muted); font-size: 0.72rem; }
