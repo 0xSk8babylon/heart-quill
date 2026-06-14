@@ -20,6 +20,7 @@ import { Route as AppInternalRouteImport } from './routes/_app.internal'
 import { Route as AppExploreRouteImport } from './routes/_app.explore'
 import { Route as AppCatalogRouteImport } from './routes/_app.catalog'
 import { Route as AppCapabilitiesRouteImport } from './routes/_app.capabilities'
+import { Route as AppInternalCapabilitiesRouteImport } from './routes/_app.internal_.capabilities'
 
 const AppRoute = AppRouteImport.update({
   id: '/_app',
@@ -75,6 +76,11 @@ const AppCapabilitiesRoute = AppCapabilitiesRouteImport.update({
   path: '/capabilities',
   getParentRoute: () => AppRoute,
 } as any)
+const AppInternalCapabilitiesRoute = AppInternalCapabilitiesRouteImport.update({
+  id: '/internal_/capabilities',
+  path: '/internal/capabilities',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -87,6 +93,7 @@ export interface FileRoutesByFullPath {
   '/progress': typeof AppProgressRoute
   '/scenario': typeof AppScenarioRoute
   '/twin': typeof AppTwinRoute
+  '/internal/capabilities': typeof AppInternalCapabilitiesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -99,6 +106,7 @@ export interface FileRoutesByTo {
   '/progress': typeof AppProgressRoute
   '/scenario': typeof AppScenarioRoute
   '/twin': typeof AppTwinRoute
+  '/internal/capabilities': typeof AppInternalCapabilitiesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -113,6 +121,7 @@ export interface FileRoutesById {
   '/_app/progress': typeof AppProgressRoute
   '/_app/scenario': typeof AppScenarioRoute
   '/_app/twin': typeof AppTwinRoute
+  '/_app/internal_/capabilities': typeof AppInternalCapabilitiesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -127,6 +136,7 @@ export interface FileRouteTypes {
     | '/progress'
     | '/scenario'
     | '/twin'
+    | '/internal/capabilities'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -139,6 +149,7 @@ export interface FileRouteTypes {
     | '/progress'
     | '/scenario'
     | '/twin'
+    | '/internal/capabilities'
   id:
     | '__root__'
     | '/'
@@ -152,6 +163,7 @@ export interface FileRouteTypes {
     | '/_app/progress'
     | '/_app/scenario'
     | '/_app/twin'
+    | '/_app/internal_/capabilities'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -238,6 +250,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppCapabilitiesRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/internal_/capabilities': {
+      id: '/_app/internal_/capabilities'
+      path: '/internal/capabilities'
+      fullPath: '/internal/capabilities'
+      preLoaderRoute: typeof AppInternalCapabilitiesRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
@@ -251,6 +270,7 @@ interface AppRouteChildren {
   AppProgressRoute: typeof AppProgressRoute
   AppScenarioRoute: typeof AppScenarioRoute
   AppTwinRoute: typeof AppTwinRoute
+  AppInternalCapabilitiesRoute: typeof AppInternalCapabilitiesRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
@@ -263,6 +283,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppProgressRoute: AppProgressRoute,
   AppScenarioRoute: AppScenarioRoute,
   AppTwinRoute: AppTwinRoute,
+  AppInternalCapabilitiesRoute: AppInternalCapabilitiesRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)

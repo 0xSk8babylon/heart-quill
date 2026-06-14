@@ -58,14 +58,8 @@ export function AppShell({ children }: { children: ReactNode }) {
             <Icon name="bell" size={19} />
             {needs ? <span className="icon-badge" /> : null}
           </button>
-          <Link to="/capabilities" className="icon-btn" aria-label="Backend capability map" title="Backend capability map">
-            <Icon name="scale" size={18} />
-          </Link>
           <Link to="/objects" className="icon-btn" aria-label="Product objects" title="Product objects">
             <Icon name="target" size={18} />
-          </Link>
-          <Link to="/catalog" className="icon-btn" aria-label="Capability catalog" title="Capability catalog">
-            <Icon name="layers" size={18} />
           </Link>
           <button className="icon-btn" aria-label="Settings"><Icon name="gear" size={19} /></button>
           <span className="avatar">{HOME.initials}</span>
