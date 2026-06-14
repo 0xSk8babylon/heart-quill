@@ -387,6 +387,54 @@ function ComparisonsView() {
   );
 }
 
+// ── Plan comparison card ───────────────────────────────────────
+const KIND_TONE: Record<PlanCard["kind"], "info" | "warn" | "ok"> = {
+  template: "info", draft: "warn", validated: "ok",
+};
+
+function PlanComparisonCard({ plan }: { plan: PlanCard }) {
+  return (
+    <article className={`card plan-card plan-card-${plan.kind}`}>
+      <header className="plan-card-head">
+        <div>
+          <p className="eyebrow">{plan.kind}</p>
+          <h3 className="card-title">{plan.name}</h3>
+        </div>
+        <Badge tone={KIND_TONE[plan.kind]}>{plan.kind}</Badge>
+      </header>
+      <p className="plan-card-headline">{plan.headline}</p>
+      <p className="plan-card-hint">{plan.hint}</p>
+      <dl className="plan-card-stats">
+        <div className="plan-stat">
+          <dt>Cost band</dt>
+          <dd><Pips n={plan.costBand} max={4} title="Cost" /></dd>
+        </div>
+        <div className="plan-stat">
+          <dt>Difficulty</dt>
+          <dd><Pips n={plan.difficulty} max={4} title="Difficulty" /></dd>
+        </div>
+        <div className="plan-stat">
+          <dt>Readiness</dt>
+          <dd>
+            <div className="plan-bar" aria-label={`Readiness ${plan.readiness}%`}>
+              <div className="plan-bar-fill" style={{ width: `${plan.readiness}%` }} />
+            </div>
+            <span className="plan-bar-val">{plan.readiness}%</span>
+          </dd>
+        </div>
+        <div className="plan-stat">
+          <dt>Missing info</dt>
+          <dd>
+            <Badge tone={plan.missingCount === 0 ? "ok" : "warn"}>
+              {plan.missingCount === 0 ? "None pending" : `${plan.missingCount} item${plan.missingCount === 1 ? "" : "s"}`}
+            </Badge>
+          </dd>
+        </div>
+      </dl>
+    </article>
+  );
+}
+
 // ── Maturity Strip ─────────────────────────────────────────────
 function MaturityStrip() {
   return (
