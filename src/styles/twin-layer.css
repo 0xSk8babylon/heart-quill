@@ -845,3 +845,23 @@ h1,h2,h3 { margin: 0; }
 .catalog-sample-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin: 0 0 6px; }
 .catalog-sample pre { margin: 0; font-family: var(--font-mono); font-size: 0.74rem; color: var(--ink-2); white-space: pre-wrap; word-break: break-word; }
 .catalog-empty { text-align: center; color: var(--muted); padding: 24px; }
+
+/* ── Product Objects (/objects) ───────────────────────────── */
+.obj-grid { display: grid; gap: 16px; }
+.obj-card { padding: 18px 20px; display: grid; gap: 16px; }
+.obj-card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; }
+.obj-card-title { display: flex; gap: 12px; align-items: flex-start; flex: 1 1 320px; }
+.obj-icon { width: 36px; height: 36px; border-radius: 10px; background: var(--surface-2); border: 1px solid var(--border); display: grid; place-items: center; color: var(--twin-glow); flex: none; }
+.obj-card-title h3 { margin: 0 0 4px; font-size: 1.05rem; }
+.obj-sub { margin: 0; color: var(--ink-2); font-size: 0.86rem; line-height: 1.45; max-width: 60ch; }
+.obj-card-meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.obj-open { font-size: 0.78rem; color: var(--twin-glow); text-decoration: none; padding: 4px 8px; border: 1px solid var(--border); border-radius: 6px; }
+.obj-open:hover { background: var(--surface-2); }
+.obj-grid-inner { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.obj-list { margin: 6px 0 0; padding-left: 18px; color: var(--ink-2); font-size: 0.84rem; line-height: 1.55; }
+.obj-list li { margin-bottom: 4px; }
+.obj-caps { border-top: 1px dashed var(--border); padding-top: 12px; }
+.obj-caps-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+.obj-cap { display: inline-flex; flex-direction: column; gap: 2px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px; padding: 6px 10px; max-width: 280px; }
+.obj-cap code { font-size: 0.76rem; color: var(--ink); font-family: var(--font-mono); }
+.obj-cap-sub { font-size: 0.72rem; color: var(--muted); }
