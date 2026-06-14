@@ -219,13 +219,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppCapabilitiesRouteImport
       parentRoute: typeof AppRoute
     }
-    '/_app/objects': {
-      id: '/_app/objects'
-      path: '/objects'
-      fullPath: '/objects'
-      preLoaderRoute: typeof AppObjectsRouteImport
-      parentRoute: typeof AppRoute
-    }
   }
 }
 

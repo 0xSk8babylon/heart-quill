@@ -61,6 +61,9 @@ export function AppShell({ children }: { children: ReactNode }) {
           <Link to="/capabilities" className="icon-btn" aria-label="Backend capability map" title="Backend capability map">
             <Icon name="scale" size={18} />
           </Link>
+          <Link to="/objects" className="icon-btn" aria-label="Product objects" title="Product objects">
+            <Icon name="target" size={18} />
+          </Link>
           <Link to="/catalog" className="icon-btn" aria-label="Capability catalog" title="Capability catalog">
             <Icon name="layers" size={18} />
           </Link>
