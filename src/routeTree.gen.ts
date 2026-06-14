@@ -16,6 +16,7 @@ import { Route as AppScenarioRouteImport } from './routes/_app.scenario'
 import { Route as AppProgressRouteImport } from './routes/_app.progress'
 import { Route as AppInternalRouteImport } from './routes/_app.internal'
 import { Route as AppExploreRouteImport } from './routes/_app.explore'
+import { Route as AppCapabilitiesRouteImport } from './routes/_app.capabilities'
 
 const AppRoute = AppRouteImport.update({
   id: '/_app',
@@ -51,9 +52,15 @@ const AppExploreRoute = AppExploreRouteImport.update({
   path: '/explore',
   getParentRoute: () => AppRoute,
 } as any)
+const AppCapabilitiesRoute = AppCapabilitiesRouteImport.update({
+  id: '/capabilities',
+  path: '/capabilities',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/capabilities': typeof AppCapabilitiesRoute
   '/explore': typeof AppExploreRoute
   '/internal': typeof AppInternalRoute
   '/progress': typeof AppProgressRoute
@@ -62,6 +69,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/capabilities': typeof AppCapabilitiesRoute
   '/explore': typeof AppExploreRoute
   '/internal': typeof AppInternalRoute
   '/progress': typeof AppProgressRoute
@@ -72,6 +80,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
+  '/_app/capabilities': typeof AppCapabilitiesRoute
   '/_app/explore': typeof AppExploreRoute
   '/_app/internal': typeof AppInternalRoute
   '/_app/progress': typeof AppProgressRoute
@@ -82,17 +91,26 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/capabilities'
     | '/explore'
     | '/internal'
     | '/progress'
     | '/scenario'
     | '/twin'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/explore' | '/internal' | '/progress' | '/scenario' | '/twin'
+  to:
+    | '/'
+    | '/capabilities'
+    | '/explore'
+    | '/internal'
+    | '/progress'
+    | '/scenario'
+    | '/twin'
   id:
     | '__root__'
     | '/'
     | '/_app'
+    | '/_app/capabilities'
     | '/_app/explore'
     | '/_app/internal'
     | '/_app/progress'
@@ -156,10 +174,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppExploreRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/capabilities': {
+      id: '/_app/capabilities'
+      path: '/capabilities'
+      fullPath: '/capabilities'
+      preLoaderRoute: typeof AppCapabilitiesRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
 interface AppRouteChildren {
+  AppCapabilitiesRoute: typeof AppCapabilitiesRoute
   AppExploreRoute: typeof AppExploreRoute
   AppInternalRoute: typeof AppInternalRoute
   AppProgressRoute: typeof AppProgressRoute
@@ -168,6 +194,7 @@ interface AppRouteChildren {
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppCapabilitiesRoute: AppCapabilitiesRoute,
   AppExploreRoute: AppExploreRoute,
   AppInternalRoute: AppInternalRoute,
   AppProgressRoute: AppProgressRoute,
@@ -184,13 +211,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
