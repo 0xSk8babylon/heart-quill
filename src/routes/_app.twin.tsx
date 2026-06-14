@@ -27,6 +27,9 @@ function TwinPage() {
           navigate({ to: "/scenario" });
         }}
       />
+      <div className="tab-wrap">
+        <StubSection group="home" />
+      </div>
       <RegistrySection
         section="home"
         eyebrow="More about your home"
