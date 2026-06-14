@@ -779,3 +779,26 @@ h1,h2,h3 { margin: 0; }
 .learn-body { color: var(--ink-2); font-size: 0.86rem; line-height: 1.5; margin: 0; }
 .learn-source { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: 0.74rem; margin: 0; font-family: var(--font-mono); }
 .learn-source code { color: var(--ink-2); }
+
+/* ============ Capability Map — UI inventory ============ */
+.cap-legend { display: flex; flex-direction: column; gap: 14px; padding: 18px; }
+.cap-legend-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+.cap-legend-item { padding: 12px 14px; border-radius: var(--r-sm); border: 1px solid var(--line-soft); background: var(--surface); display: flex; flex-direction: column; gap: 6px; }
+.cap-legend-ok      { border-left: 3px solid var(--ok); }
+.cap-legend-info    { border-left: 3px solid var(--twin-glow); }
+.cap-legend-warn    { border-left: 3px solid var(--accent-warn); }
+.cap-legend-off     { border-left: 3px solid var(--off); }
+.cap-legend-head { display: flex; justify-content: space-between; align-items: center; }
+.cap-legend-count { font-family: var(--font-display); font-weight: 800; font-size: 1.4rem; color: var(--ink); }
+.cap-legend-desc { color: var(--ink-2); font-size: 0.8rem; line-height: 1.4; margin: 0; }
+
+.cap-card.cap-ui-ok    { border-left: 3px solid var(--ok); }
+.cap-card.cap-ui-info  { border-left: 3px solid var(--twin-glow); }
+.cap-card.cap-ui-warn  { border-left: 3px solid var(--accent-warn); }
+.cap-card.cap-ui-off   { border-left: 3px solid var(--off); }
+
+.cap-endpoint-sep { color: var(--muted); margin: 0 2px; }
+.cap-locations { list-style: none; padding: 0; margin: 4px 0 0; display: flex; flex-direction: column; gap: 4px; }
+.cap-locations li { display: flex; align-items: start; gap: 6px; font-size: 0.78rem; color: var(--ink-2); line-height: 1.4; }
+.cap-locations li svg { color: var(--ok); flex-shrink: 0; margin-top: 3px; }
+.cap-locations-empty { color: var(--muted); font-size: 0.78rem; font-style: italic; margin: 4px 0 0; }
