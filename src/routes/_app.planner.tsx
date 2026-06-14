@@ -351,6 +351,11 @@ function ComparisonsView() {
         Compare templates and drafts on the same fields. Validated scenarios appear here once a draft
         clears its readiness gates.
       </p>
+
+      <div className="plan-card-grid">
+        {PLAN_CARDS.map((p) => <PlanComparisonCard key={p.id} plan={p} />)}
+      </div>
+
       <div className="compare-table-wrap">
         <table className="compare-table">
           <thead>
