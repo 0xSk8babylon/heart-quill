@@ -19,6 +19,7 @@ import { Route as AppInternalRouteImport } from './routes/_app.internal'
 import { Route as AppExploreRouteImport } from './routes/_app.explore'
 import { Route as AppCatalogRouteImport } from './routes/_app.catalog'
 import { Route as AppCapabilitiesRouteImport } from './routes/_app.capabilities'
+import { Route as AppObjectsRouteImport } from './routes/_app.objects'
 
 const AppRoute = AppRouteImport.update({
   id: '/_app',
