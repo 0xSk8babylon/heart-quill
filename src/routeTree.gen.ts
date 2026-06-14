@@ -69,11 +69,6 @@ const AppCapabilitiesRoute = AppCapabilitiesRouteImport.update({
   path: '/capabilities',
   getParentRoute: () => AppRoute,
 } as any)
-const AppObjectsRoute = AppObjectsRouteImport.update({
-  id: '/objects',
-  path: '/objects',
-  getParentRoute: () => AppRoute,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
