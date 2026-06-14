@@ -3,6 +3,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { ScenarioBuilder } from "@/components/twin-layer/ScenarioBuilder";
 import { GlanceWorkspace } from "@/components/twin-layer/GlanceWorkspace";
 import { RegistrySection } from "@/components/twin-layer/RegistryCard";
+import { StubSection } from "@/components/twin-layer/StubSection";
 
 import { HomeDiagram, type EcoOverlay } from "@/components/twin-layer/HomeDiagram";
 import { StatusDot } from "@/components/twin-layer/atoms";
@@ -156,6 +157,7 @@ function ScenarioPage() {
 
 
       <div className="tab-wrap">
+        <StubSection group="planner" />
         <RegistrySection
           section="planner"
           eyebrow="More planning surfaces"
