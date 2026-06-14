@@ -10,10 +10,11 @@ export type CapabilityStatus =
 
 // UI-shell inventory — does heart-quill render this capability today?
 export type UiStatus =
-  | "in_shell"     // A card / surface clearly represents this capability
-  | "missing"      // No UI card yet — capability exists only in backend
-  | "duplicated"   // Rendered redundantly across multiple surfaces
-  | "future_wired"; // Card exists but is a stub waiting for the router
+  | "in_shell"             // A card / surface clearly represents this capability
+  | "missing"              // No UI card yet — capability exists only in backend
+  | "source_view_pair"     // Paired with another router: one stores the source of truth, the other renders the view
+  | "trust_candidate_pair" // Paired with another router: one holds candidate data, the other attests / verifies it
+  | "future_wired";        // Card exists but is a stub waiting for the router
 
 export type CapabilityGroup = "home" | "explore" | "planner" | "builder" | "internal";
 
