@@ -6,10 +6,10 @@ import { Icon, type IconName } from "./Icon";
 import { Inspector } from "./Inspector";
 
 const TABS: Array<{ to: "/twin" | "/explore" | "/scenario" | "/progress"; icon: IconName; title: string; sub: string }> = [
-  { to: "/twin", icon: "home", title: "Twin Home", sub: "Your digital home" },
-  { to: "/explore", icon: "search", title: "Explore", sub: "Profile, goals & priorities" },
-  { to: "/scenario", icon: "layers", title: "Plan", sub: "Plan. Compare. Decide." },
-  { to: "/progress", icon: "users", title: "Build", sub: "Shared with your contractor" },
+  { to: "/twin", icon: "home", title: "Home", sub: "Your digital twin" },
+  { to: "/explore", icon: "search", title: "Explore", sub: "Profile · goals · learn" },
+  { to: "/scenario", icon: "layers", title: "Planner", sub: "Plan. Compare. Decide." },
+  { to: "/progress", icon: "users", title: "Builder", sub: "Shared with your contractor" },
 ];
 
 export function AppShell({ children }: { children: ReactNode }) {
