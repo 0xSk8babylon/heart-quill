@@ -2,7 +2,9 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { HomeTwin } from "@/components/twin-layer/HomeTwin";
 import { RegistrySection } from "@/components/twin-layer/RegistryCard";
 import { StubSection } from "@/components/twin-layer/StubSection";
+import { Icon } from "@/components/twin-layer/Icon";
 import { useTwin } from "@/lib/twin-layer/store";
+import { TWIN_OVERVIEW } from "@/lib/twin-layer/objects";
 
 export const Route = createFileRoute("/_app/twin")({
   head: () => ({
@@ -24,9 +26,34 @@ function TwinPage() {
       <HomeTwin
         onGoals={() => {
           showToast("Let’s set your energy goals");
-          navigate({ to: "/scenario" });
+          navigate({ to: "/explore" });
         }}
       />
+
+      <div className="tab-wrap">
+        <section className="card twin-overview">
+          <header className="card-head">
+            <div>
+              <p className="eyebrow">Energy Twin</p>
+              <h3 className="card-title">{TWIN_OVERVIEW.headline}</h3>
+              <p className="twin-overview-sub">{TWIN_OVERVIEW.sub}</p>
+            </div>
+            <span className="live-tag live-active"><span className="live-dot" />Live</span>
+          </header>
+          <ul className="twin-overview-grid">
+            {TWIN_OVERVIEW.blocks.map((b) => (
+              <li key={b.label} className="twin-overview-item">
+                <span className="twin-overview-icon"><Icon name={b.icon} size={18} /></span>
+                <div>
+                  <p className="twin-overview-label">{b.label}</p>
+                  <p className="twin-overview-hint">{b.hint}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+      </div>
+
       <div className="tab-wrap">
         <StubSection group="home" />
       </div>

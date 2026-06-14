@@ -5,11 +5,11 @@ import { useTwin } from "@/lib/twin-layer/store";
 import { Icon, type IconName } from "./Icon";
 import { Inspector } from "./Inspector";
 
-const TABS: Array<{ to: "/twin" | "/explore" | "/scenario" | "/progress"; icon: IconName; title: string; sub: string }> = [
-  { to: "/twin", icon: "home", title: "Home", sub: "Your digital twin" },
-  { to: "/explore", icon: "search", title: "Explore", sub: "Profile · goals · learn" },
-  { to: "/scenario", icon: "layers", title: "Planner", sub: "Plan. Compare. Decide." },
-  { to: "/progress", icon: "users", title: "Builder", sub: "Shared with your contractor" },
+const TABS: Array<{ to: "/twin" | "/explore" | "/planner" | "/progress"; icon: IconName; title: string; sub: string }> = [
+  { to: "/twin", icon: "home", title: "Home", sub: "Your Energy Twin" },
+  { to: "/explore", icon: "search", title: "Explore", sub: "Goals · learn" },
+  { to: "/planner", icon: "layers", title: "Planner", sub: "Templates · drafts · compare" },
+  { to: "/progress", icon: "users", title: "Builder", sub: "Your project" },
 ];
 
 export function AppShell({ children }: { children: ReactNode }) {
