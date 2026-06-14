@@ -2,18 +2,21 @@ import { useMemo, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Badge } from "@/components/twin-layer/atoms";
 import { Icon } from "@/components/twin-layer/Icon";
+import { HomeDiagram } from "@/components/twin-layer/HomeDiagram";
+import { NODES } from "@/lib/twin-layer/data";
 import {
   TEMPLATES, SANDBOX_DRAFTS, COMPARISON_FIELDS, MATURITY,
-  type TemplateArchitecture,
+  TEMPLATE_OVERLAYS, UPGRADE_PATH, PLAN_CARDS,
+  type TemplateArchitecture, type PlanCard, type UpgradeStep,
 } from "@/lib/twin-layer/objects";
 
 export const Route = createFileRoute("/_app/planner")({
   head: () => ({
     meta: [
       { title: "Planner — Twin Layer" },
-      { name: "description", content: "Guided templates, sandbox drafts, and comparisons — plan your home energy upgrade before you commit." },
+      { name: "description", content: "Visual scenario builder — see how each template touches your home, compare cost / difficulty / readiness, and plan the upgrade path." },
       { property: "og:title", content: "Planner — Twin Layer" },
-      { property: "og:description", content: "Guided templates, sandbox drafts, and comparisons — plan your home energy upgrade before you commit." },
+      { property: "og:description", content: "Visual scenario builder — see how each template touches your home, compare cost / difficulty / readiness, and plan the upgrade path." },
     ],
   }),
   component: PlannerPage,
@@ -23,6 +26,10 @@ type Tab = "templates" | "sandbox" | "comparisons";
 
 function PlannerPage() {
   const [tab, setTab] = useState<Tab>("templates");
+  const overlayKeys = Object.keys(TEMPLATE_OVERLAYS);
+  const [overlayId, setOverlayId] = useState<string>(overlayKeys[0]);
+  const overlay = TEMPLATE_OVERLAYS[overlayId];
+
   return (
     <div className="tab-wrap">
       <header className="tab-head">
@@ -30,9 +37,9 @@ function PlannerPage() {
           <p className="eyebrow">Planner</p>
           <h2 className="tab-title">Plan. Compare. Decide.</h2>
           <p className="tab-lede">
-            Start from a known pattern, sketch your own draft, or compare them side by side. Nothing
-            here is committed — drafts only become a real plan when they're validated against your
-            home and a contractor.
+            See how each pattern touches your home, sketch your own draft, and compare them side by
+            side. Nothing here is committed — drafts only become a real plan when they're validated
+            against your home and a contractor.
           </p>
         </div>
         <div className="tab-head-meta">
@@ -41,10 +48,14 @@ function PlannerPage() {
         </div>
       </header>
 
+      <PlannerCanvas overlayId={overlayId} setOverlayId={setOverlayId} overlay={overlay} />
+
+      <UpgradePathStrip />
+
       <nav className="planner-tabs" role="tablist">
         <TabBtn id="templates"   active={tab} onClick={setTab} icon="layers" label="Guided Templates" count={TEMPLATES.length} />
         <TabBtn id="sandbox"     active={tab} onClick={setTab} icon="spark"  label="Sandbox Drafts"   count={SANDBOX_DRAFTS.length} />
-        <TabBtn id="comparisons" active={tab} onClick={setTab} icon="scale"  label="Comparisons"      count={SANDBOX_DRAFTS.length + 1} />
+        <TabBtn id="comparisons" active={tab} onClick={setTab} icon="scale"  label="Comparisons"      count={PLAN_CARDS.length} />
       </nav>
 
       {tab === "templates"   ? <TemplatesView />   : null}
@@ -55,6 +66,122 @@ function PlannerPage() {
     </div>
   );
 }
+
+// ── Canvas: home twin + overlay of what a template adds ────────
+function PlannerCanvas({
+  overlayId, setOverlayId, overlay,
+}: {
+  overlayId: string;
+  setOverlayId: (id: string) => void;
+  overlay: { color: string; nodeIds: string[]; caption: string };
+}) {
+  const noop = () => {};
+  return (
+    <section className="card planner-canvas-card">
+      <header className="planner-canvas-head">
+        <div>
+          <p className="eyebrow">Scenario canvas</p>
+          <h3 className="card-title">How a pattern lands on your home</h3>
+          <p className="planner-canvas-lede">
+            Read-only visualization. Highlights show which parts of your Energy Twin a pattern would
+            touch. No equipment is added or committed.
+          </p>
+        </div>
+        <div className="planner-canvas-legend" aria-hidden="true">
+          <span className="planner-canvas-swatch" style={{ background: overlay.color }} />
+          <span>Touched by pattern</span>
+        </div>
+      </header>
+
+      <div className="planner-canvas-grid">
+        <div className="planner-canvas-diagram">
+          <HomeDiagram
+            nodes={NODES}
+            selectedId={null}
+            onSelect={noop}
+            compact
+            overlay={{ color: overlay.color, nodeIds: overlay.nodeIds }}
+          />
+        </div>
+        <div className="planner-canvas-side">
+          <p className="field-label">Preview a pattern</p>
+          <div className="planner-canvas-chips" role="tablist" aria-label="Preview pattern">
+            {Object.entries(TEMPLATE_OVERLAYS).map(([id, o]) => {
+              const t = TEMPLATES.find((x) => x.id === id);
+              const on = id === overlayId;
+              return (
+                <button
+                  key={id}
+                  type="button"
+                  role="tab"
+                  aria-selected={on}
+                  className={`planner-canvas-chip ${on ? "planner-canvas-chip-on" : ""}`}
+                  onClick={() => setOverlayId(id)}
+                  style={on ? { borderColor: o.color, boxShadow: `0 0 0 1px ${o.color} inset` } : undefined}
+                >
+                  <span className="planner-canvas-chip-dot" style={{ background: o.color }} />
+                  <span className="planner-canvas-chip-label">
+                    {t ? `${t.architecture} · ${t.intent}` : id}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+          <p className="planner-canvas-caption">{overlay.caption}</p>
+          <p className="planner-canvas-note">
+            Visualization only — actual equipment, conduit and panel work are decided with a
+            contractor on the Builder tab.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ── Upgrade path strip ─────────────────────────────────────────
+const STATE_TONE: Record<UpgradeStep["state"], "ok" | "info" | "warn" | "default"> = {
+  current: "ok",
+  ready: "ok",
+  planned: "info",
+  future: "default",
+  blocked: "warn",
+};
+
+function UpgradePathStrip() {
+  return (
+    <section className="card upgrade-path-card">
+      <header className="card-head">
+        <div>
+          <p className="eyebrow">Upgrade path</p>
+          <h3 className="card-title">From today toward your goals</h3>
+          <p className="planner-canvas-lede">
+            A possible order of upgrades for this home. Order, costs and timing are illustrative.
+          </p>
+        </div>
+        <Badge tone="info">Read-only</Badge>
+      </header>
+      <ol className="upgrade-path">
+        {UPGRADE_PATH.map((s, i) => (
+          <li key={s.id} className={`upgrade-step upgrade-step-${s.state}`}>
+            <div className="upgrade-step-marker">
+              <span className="upgrade-step-num">{i + 1}</span>
+              {i < UPGRADE_PATH.length - 1 ? <span className="upgrade-step-line" /> : null}
+            </div>
+            <div className="upgrade-step-body">
+              <div className="upgrade-step-head">
+                <span className="upgrade-step-label">{s.label}</span>
+                <Badge tone={STATE_TONE[s.state]}>{s.state}</Badge>
+              </div>
+              <p className="upgrade-step-detail">{s.detail}</p>
+              {s.note ? <p className="upgrade-step-note"><Icon name="shield" size={11} />{s.note}</p> : null}
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
+  );
+}
+
 
 function TabBtn({
   id, active, onClick, icon, label, count,
