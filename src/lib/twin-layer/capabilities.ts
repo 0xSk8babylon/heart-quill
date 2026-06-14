@@ -10,10 +10,11 @@ export type CapabilityStatus =
 
 // UI-shell inventory — does heart-quill render this capability today?
 export type UiStatus =
-  | "in_shell"     // A card / surface clearly represents this capability
-  | "missing"      // No UI card yet — capability exists only in backend
-  | "duplicated"   // Rendered redundantly across multiple surfaces
-  | "future_wired"; // Card exists but is a stub waiting for the router
+  | "in_shell"             // A card / surface clearly represents this capability
+  | "missing"              // No UI card yet — capability exists only in backend
+  | "source_view_pair"     // Paired with another router: one stores the source of truth, the other renders the view
+  | "trust_candidate_pair" // Paired with another router: one holds candidate data, the other attests / verifies it
+  | "future_wired";        // Card exists but is a stub waiting for the router
 
 export type CapabilityGroup = "home" | "explore" | "planner" | "builder" | "internal";
 
@@ -55,7 +56,7 @@ export const CAPABILITIES: Capability[] = [
   // ─── Home ──────────────────────────────────────────────────────────────
   { id: "accounts",      router: "accounts",       endpointGroup: "/accounts",        supports: "Avatar · session · ownership",      status: "mocked",       uiStatus: "in_shell",     uiLocations: ["AppShell topnav avatar (HOME.initials)"], note: "Auth + home-access middleware live in backend." },
   { id: "homes",         router: "homes",          endpointGroup: "/homes",           supports: "Twin Home header · address card",   status: "future_wired", uiStatus: "future_wired", uiLocations: ["/twin · HomeTwin header"], note: "Replaces HOME constant in src/lib/twin-layer/data.ts." },
-  { id: "buildings",     router: "buildings",      endpointGroup: "/buildings",       supports: "Known Home Facts card",             status: "future_wired", uiStatus: "duplicated",   uiLocations: ["/twin · Known Home Facts registry card", "Overlaps with facts router"], note: "Both buildings and facts feed the same card." },
+  { id: "buildings",     router: "buildings",      endpointGroup: "/buildings",       supports: "Known Home Facts card",             status: "future_wired", uiStatus: "source_view_pair",   uiLocations: ["/twin · Known Home Facts registry card", "Paired with facts router (view side)"], note: "Source/view pair with facts: buildings holds the structural record; facts renders the homeowner-readable view." },
   { id: "panels",        router: "panels",         endpointGroup: "/panels",          supports: "Main Panel node · panel schedule",  status: "future_wired", uiStatus: "in_shell",     uiLocations: ["/twin · HomeDiagram panel node", "/scenario · diagram node"] },
   { id: "loads",         router: "loads",          endpointGroup: "/loads",           supports: "Backup Loads node · circuit list",  status: "future_wired", uiStatus: "in_shell",     uiLocations: ["/twin · Backup Loads node"] },
   { id: "energy_passport", router: "energy_passport", endpointGroup: "/energy-passport", supports: "Energy Passport card",          status: "future_wired", uiStatus: "in_shell",     uiLocations: ["/twin · Energy Passport registry card"] },
@@ -77,7 +78,7 @@ export const CAPABILITIES: Capability[] = [
   { id: "equipment",              router: "equipment",              endpointGroup: "/equipment",               supports: "Equipment chips per scenario",   status: "future_wired", uiStatus: "in_shell",     uiLocations: ["/scenario · chips on each pathway card"] },
   { id: "compatibility_rules",    router: "compatibility_rules",    endpointGroup: "/compatibility-rules",     supports: "Compatibility card",             status: "future_wired", uiStatus: "in_shell",     uiLocations: ["/scenario · Compatibility registry card", "/explore · Learn card"] },
   { id: "design_advisor",         router: "design_advisor",         endpointGroup: "/design-advisor",          supports: "Recommended pathway badge",      status: "backend_only", uiStatus: "future_wired", uiLocations: ["/scenario · 'Recommended' badge on balanced pathway"], note: "Badge is hardcoded in SCENARIOS." },
-  { id: "proposal_option_sets",   router: "proposal_option_sets",   endpointGroup: "/proposal-options",        supports: "Compare ecosystems sidebar",     status: "future_wired", uiStatus: "duplicated",   uiLocations: ["/scenario · Compare ecosystems", "Overlaps with product_library"], note: "Sidebar mixes proposal sets and product library." },
+  { id: "proposal_option_sets",   router: "proposal_option_sets",   endpointGroup: "/proposal-options",        supports: "Compare ecosystems sidebar",     status: "future_wired", uiStatus: "source_view_pair", uiLocations: ["/scenario · Compare ecosystems", "Paired with product_library (catalog side)"], note: "Source/view pair with product_library: product_library is the catalog of equipment; proposal_option_sets is the curated, scenario-shaped view of it." },
   { id: "takeoffs",               router: "takeoffs",               endpointGroup: "/takeoffs",                supports: "Future: bill-of-materials view", status: "backend_only", uiStatus: "future_wired",      uiLocations: ["/scenario · Stub: Bill of materials"] },
   { id: "planning",               router: "planning",               endpointGroup: "/planning",                supports: "Planner narrative + framing",    status: "future_wired", uiStatus: "in_shell",     uiLocations: ["/scenario · tab header copy"] },
 
@@ -90,8 +91,8 @@ export const CAPABILITIES: Capability[] = [
 
   // ─── Internal / Admin ──────────────────────────────────────────────────
   { id: "ai_context",         router: "ai_context",         endpointGroup: "/internal/ai-context",       supports: "AI prompt grounding",          status: "backend_only", uiStatus: "future_wired",      uiLocations: ["/internal · Stub: AI prompt grounding"] },
-  { id: "evidence",           router: "evidence",           endpointGroup: "/internal/evidence",         supports: "Trust badges (verified / derived)", status: "future_wired", uiStatus: "duplicated", uiLocations: ["TrustBadge atom on Inspector", "Overlaps with provenance basis line"] },
-  { id: "facts",              router: "facts",              endpointGroup: "/internal/facts",            supports: "Known Home Facts substrate",   status: "future_wired", uiStatus: "duplicated",   uiLocations: ["/twin · Known Home Facts", "Overlaps with buildings router"] },
+  { id: "evidence",           router: "evidence",           endpointGroup: "/internal/evidence",         supports: "Trust badges (verified / derived)", status: "future_wired", uiStatus: "trust_candidate_pair", uiLocations: ["TrustBadge atom on Inspector", "Paired with provenance (basis side)"], note: "Trust/candidate pair with provenance: evidence holds the attestation (what was verified, by whom); provenance describes the basis (where the value came from)." },
+  { id: "facts",              router: "facts",              endpointGroup: "/internal/facts",            supports: "Known Home Facts substrate",   status: "future_wired", uiStatus: "trust_candidate_pair", uiLocations: ["/twin · Known Home Facts", "Paired with buildings (source side)"], note: "Trust/candidate pair with buildings: facts are the candidate values surfaced to the homeowner; buildings is the structural source-of-truth they resolve against." },
   { id: "geometry",           router: "geometry",           endpointGroup: "/internal/geometry",         supports: "Future: roof / panel geometry", status: "backend_only", uiStatus: "future_wired",      uiLocations: ["/internal · Stub: Roof & panel geometry"] },
   { id: "provenance",         router: "provenance",         endpointGroup: "/internal/provenance",       supports: "Source / basis line on Inspector", status: "future_wired", uiStatus: "in_shell",     uiLocations: ["Inspector drawer · basis text"] },
   { id: "rule_provenance",    router: "rule_provenance",    endpointGroup: "/internal/rule-provenance",  supports: "Why a compatibility rule fired", status: "backend_only", uiStatus: "future_wired",      uiLocations: ["/internal · Stub: Why this rule fired"] },
@@ -117,14 +118,15 @@ export const STATUS_META: Record<CapabilityStatus, { label: string; tone: "ok" |
 };
 
 export const UI_STATUS_META: Record<UiStatus, { label: string; tone: "ok" | "warn" | "info" | "off"; desc: string }> = {
-  in_shell:     { label: "In shell",     tone: "ok",   desc: "A card or surface clearly represents this capability today." },
-  missing:      { label: "Missing",      tone: "off",  desc: "No UI yet — capability exists only in the backend or in Learn copy." },
-  duplicated:   { label: "Duplicated",   tone: "warn", desc: "Rendered redundantly across multiple surfaces; needs consolidation." },
-  future_wired: { label: "Stub card",    tone: "info", desc: "Card exists but uses placeholder data — waiting for the router." },
+  in_shell:             { label: "In shell",             tone: "ok",   desc: "A card or surface clearly represents this capability today." },
+  missing:              { label: "Missing",              tone: "off",  desc: "No UI yet — capability exists only in the backend or in Learn copy." },
+  source_view_pair:     { label: "Source/view pair",     tone: "info", desc: "Two routers intentionally pair up: one stores the source of truth, the other shapes the homeowner-facing view." },
+  trust_candidate_pair: { label: "Trust/candidate pair", tone: "info", desc: "Two routers intentionally pair up: one holds candidate values, the other attests or verifies them." },
+  future_wired:         { label: "Stub card",            tone: "info", desc: "Card exists but uses placeholder data — waiting for the router." },
 };
 
 export function uiSummary() {
-  const counts: Record<UiStatus, number> = { in_shell: 0, missing: 0, duplicated: 0, future_wired: 0 };
+  const counts: Record<UiStatus, number> = { in_shell: 0, missing: 0, source_view_pair: 0, trust_candidate_pair: 0, future_wired: 0 };
   for (const c of CAPABILITIES) counts[c.uiStatus] += 1;
   return counts;
 }

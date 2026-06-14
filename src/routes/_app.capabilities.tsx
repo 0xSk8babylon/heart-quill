@@ -32,7 +32,7 @@ const GROUP_LINK: Partial<Record<CapabilityGroup, { to: "/twin" | "/explore" | "
   internal: { to: "/internal", label: "Open Internal" },
 };
 
-const UI_ORDER: UiStatus[] = ["in_shell", "future_wired", "duplicated", "missing"];
+const UI_ORDER: UiStatus[] = ["in_shell", "future_wired", "source_view_pair", "trust_candidate_pair", "missing"];
 
 function CapabilitiesPage() {
   const counts = uiSummary();
