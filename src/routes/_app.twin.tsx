@@ -1,6 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { HomeTwin } from "@/components/twin-layer/HomeTwin";
 import { RegistrySection } from "@/components/twin-layer/RegistryCard";
+import { StubSection } from "@/components/twin-layer/StubSection";
 import { useTwin } from "@/lib/twin-layer/store";
 
 export const Route = createFileRoute("/_app/twin")({
