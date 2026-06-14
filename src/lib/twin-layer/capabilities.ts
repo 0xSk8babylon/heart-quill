@@ -118,14 +118,15 @@ export const STATUS_META: Record<CapabilityStatus, { label: string; tone: "ok" |
 };
 
 export const UI_STATUS_META: Record<UiStatus, { label: string; tone: "ok" | "warn" | "info" | "off"; desc: string }> = {
-  in_shell:     { label: "In shell",     tone: "ok",   desc: "A card or surface clearly represents this capability today." },
-  missing:      { label: "Missing",      tone: "off",  desc: "No UI yet — capability exists only in the backend or in Learn copy." },
-  duplicated:   { label: "Duplicated",   tone: "warn", desc: "Rendered redundantly across multiple surfaces; needs consolidation." },
-  future_wired: { label: "Stub card",    tone: "info", desc: "Card exists but uses placeholder data — waiting for the router." },
+  in_shell:             { label: "In shell",             tone: "ok",   desc: "A card or surface clearly represents this capability today." },
+  missing:              { label: "Missing",              tone: "off",  desc: "No UI yet — capability exists only in the backend or in Learn copy." },
+  source_view_pair:     { label: "Source/view pair",     tone: "info", desc: "Two routers intentionally pair up: one stores the source of truth, the other shapes the homeowner-facing view." },
+  trust_candidate_pair: { label: "Trust/candidate pair", tone: "info", desc: "Two routers intentionally pair up: one holds candidate values, the other attests or verifies them." },
+  future_wired:         { label: "Stub card",            tone: "info", desc: "Card exists but uses placeholder data — waiting for the router." },
 };
 
 export function uiSummary() {
-  const counts: Record<UiStatus, number> = { in_shell: 0, missing: 0, duplicated: 0, future_wired: 0 };
+  const counts: Record<UiStatus, number> = { in_shell: 0, missing: 0, source_view_pair: 0, trust_candidate_pair: 0, future_wired: 0 };
   for (const c of CAPABILITIES) counts[c.uiStatus] += 1;
   return counts;
 }
