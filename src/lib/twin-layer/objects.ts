@@ -234,3 +234,91 @@ export const TWIN_OVERVIEW = {
     { icon: "spark"    as IconName, label: "Upgrade readiness",         hint: "What can be added now vs. needs a step first." },
   ],
 };
+
+// ──────────────────────────────────────────────────────────────
+// Planner canvas — overlays, upgrade path, plan comparison cards
+// All values are illustrative / read-only. No backend writes.
+// ──────────────────────────────────────────────────────────────
+
+// Which Home-Twin node ids each template visually touches.
+// Keep ids aligned with NODES in src/lib/twin-layer/data.ts.
+export const TEMPLATE_OVERLAYS: Record<string, { color: string; nodeIds: string[]; caption: string }> = {
+  "ac-solar":     { color: "#f5b454", nodeIds: ["solar", "panel", "meter"],                 caption: "Adds solar tied into the existing panel." },
+  "ac-partial":   { color: "#8fb8d8", nodeIds: ["solar", "battery", "panel", "backup"],     caption: "Solar + battery covering critical loads only." },
+  "ac-whole":     { color: "#8fb8d8", nodeIds: ["solar", "battery", "panel", "backup", "generator"], caption: "Whole-home backup, generator layered behind battery." },
+  "dc-tou":       { color: "#a6d4a1", nodeIds: ["solar", "battery", "panel"],               caption: "Hybrid inverter for daily self-consumption." },
+  "off-gen":      { color: "#e0913f", nodeIds: ["solar", "battery", "generator", "panel", "backup"], caption: "Off-grid with generator-assisted long duration." },
+};
+
+// Upgrade path — a simple staged visualization the homeowner can read left to right.
+// Status is illustrative only.
+export type UpgradeStep = {
+  id: string;
+  label: string;
+  detail: string;
+  state: "current" | "ready" | "planned" | "future" | "blocked";
+  note?: string;
+};
+
+export const UPGRADE_PATH: UpgradeStep[] = [
+  { id: "today",   label: "Today",            detail: "Service, panel, EV circuit on file.",          state: "current" },
+  { id: "solar",   label: "Add solar",        detail: "Roof + utility look compatible.",              state: "ready",   note: "Shading study still pending." },
+  { id: "battery", label: "Add battery",      detail: "Sized to critical loads first.",               state: "planned" },
+  { id: "panel",   label: "Smart panel",      detail: "Enables whole-home backup later.",             state: "future" },
+  { id: "hp",      label: "Heat pump",        detail: "May exceed 200A service.",                     state: "blocked", note: "NEC service check needed." },
+];
+
+// Plan comparison cards (lightweight). Used above the comparison table.
+export type PlanCardKind = "template" | "draft" | "validated";
+export type PlanCard = {
+  id: string;
+  name: string;
+  kind: PlanCardKind;
+  templateId?: string;       // links into TEMPLATE_OVERLAYS
+  costBand: 1 | 2 | 3 | 4;    // ◐◐◐◐
+  difficulty: 1 | 2 | 3 | 4;
+  readiness: number;          // 0–100, mock
+  missingCount: number;       // 0+, mock
+  headline: string;           // one-liner
+  hint: string;               // small caption under headline
+};
+
+export const PLAN_CARDS: PlanCard[] = [
+  {
+    id: "plan-ac-partial",
+    name: "Template · AC Partial Backup",
+    kind: "template",
+    templateId: "ac-partial",
+    costBand: 2,
+    difficulty: 2,
+    readiness: 70,
+    missingCount: 0,
+    headline: "Critical loads stay on during outages.",
+    hint: "Known starting pattern · not yet customized.",
+  },
+  {
+    id: "plan-summer-resilience",
+    name: "Summer resilience sketch",
+    kind: "draft",
+    templateId: "ac-partial",
+    costBand: 2,
+    difficulty: 2,
+    readiness: 55,
+    missingCount: 2,
+    headline: "Critical loads + lean battery reserve.",
+    hint: "Draft · shading study and panel confirmation pending.",
+  },
+  {
+    id: "plan-ev-future",
+    name: "EV + future heat pump",
+    kind: "draft",
+    templateId: "dc-tou",
+    costBand: 3,
+    difficulty: 3,
+    readiness: 40,
+    missingCount: 2,
+    headline: "Future-proof for heat pump + EV.",
+    hint: "Draft · heat-pump load may exceed 200A service.",
+  },
+];
+
