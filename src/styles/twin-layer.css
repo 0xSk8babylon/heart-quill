@@ -802,3 +802,14 @@ h1,h2,h3 { margin: 0; }
 .cap-locations li { display: flex; align-items: start; gap: 6px; font-size: 0.78rem; color: var(--ink-2); line-height: 1.4; }
 .cap-locations li svg { color: var(--ok); flex-shrink: 0; margin-top: 3px; }
 .cap-locations-empty { color: var(--muted); font-size: 0.78rem; font-style: italic; margin: 4px 0 0; }
+
+/* ============ Stub / placeholder cards ============ */
+.stub-card { border-left: 3px solid var(--twin-glow); background: linear-gradient(180deg, hsl(var(--primary) / 0.04), transparent 60%); }
+.stub-card .registry-empty { color: var(--ink-2); }
+.stub-preview { list-style: none; padding: 0; margin: 10px 0 6px; display: flex; flex-direction: column; gap: 6px; }
+.stub-preview li { display: flex; align-items: center; gap: 10px; font-size: 0.82rem; color: var(--ink-2); }
+.stub-shimmer { display: inline-block; width: 14px; height: 14px; border-radius: 3px; background: linear-gradient(90deg, var(--surface) 0%, var(--surface-2) 50%, var(--surface) 100%); background-size: 200% 100%; animation: stub-shimmer 1.8s linear infinite; flex-shrink: 0; }
+@keyframes stub-shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+.stub-foot { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+.cap-endpoint-inline { display: inline-flex; align-items: center; gap: 4px; color: var(--muted); font-size: 0.74rem; }
+.cap-endpoint-inline code { font-family: var(--font-mono); color: var(--ink-2); }
