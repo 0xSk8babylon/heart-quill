@@ -157,6 +157,7 @@ function ScenarioPage() {
 
 
       <div className="tab-wrap">
+        <StubSection group="planner" />
         <RegistrySection
           section="planner"
           eyebrow="More planning surfaces"
