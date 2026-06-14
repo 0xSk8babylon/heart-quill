@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { RegistrySection } from "@/components/twin-layer/RegistryCard";
+import { StubSection } from "@/components/twin-layer/StubSection";
 
 export const Route = createFileRoute("/_app/internal")({
   head: () => ({
@@ -24,6 +25,7 @@ function InternalPage() {
           </p>
         </div>
       </header>
+      <StubSection group="internal" />
       <RegistrySection
         section="hidden"
         eyebrow="Cockpit"
