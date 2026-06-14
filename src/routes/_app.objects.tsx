@@ -90,7 +90,7 @@ const OBJECTS: ProductObject[] = [
   {
     id: "learn",
     name: "Learn",
-    icon: "book",
+    icon: "search",
     section: "Explore",
     sectionRoute: "/explore",
     status: "stubbed",
