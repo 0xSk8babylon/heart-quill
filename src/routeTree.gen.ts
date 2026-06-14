@@ -16,6 +16,7 @@ import { Route as AppScenarioRouteImport } from './routes/_app.scenario'
 import { Route as AppProgressRouteImport } from './routes/_app.progress'
 import { Route as AppInternalRouteImport } from './routes/_app.internal'
 import { Route as AppExploreRouteImport } from './routes/_app.explore'
+import { Route as AppCatalogRouteImport } from './routes/_app.catalog'
 import { Route as AppCapabilitiesRouteImport } from './routes/_app.capabilities'
 
 const AppRoute = AppRouteImport.update({
@@ -52,6 +53,11 @@ const AppExploreRoute = AppExploreRouteImport.update({
   path: '/explore',
   getParentRoute: () => AppRoute,
 } as any)
+const AppCatalogRoute = AppCatalogRouteImport.update({
+  id: '/catalog',
+  path: '/catalog',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppCapabilitiesRoute = AppCapabilitiesRouteImport.update({
   id: '/capabilities',
   path: '/capabilities',
@@ -61,6 +67,7 @@ const AppCapabilitiesRoute = AppCapabilitiesRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/capabilities': typeof AppCapabilitiesRoute
+  '/catalog': typeof AppCatalogRoute
   '/explore': typeof AppExploreRoute
   '/internal': typeof AppInternalRoute
   '/progress': typeof AppProgressRoute
@@ -70,6 +77,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/capabilities': typeof AppCapabilitiesRoute
+  '/catalog': typeof AppCatalogRoute
   '/explore': typeof AppExploreRoute
   '/internal': typeof AppInternalRoute
   '/progress': typeof AppProgressRoute
@@ -81,6 +89,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
   '/_app/capabilities': typeof AppCapabilitiesRoute
+  '/_app/catalog': typeof AppCatalogRoute
   '/_app/explore': typeof AppExploreRoute
   '/_app/internal': typeof AppInternalRoute
   '/_app/progress': typeof AppProgressRoute
@@ -92,6 +101,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/capabilities'
+    | '/catalog'
     | '/explore'
     | '/internal'
     | '/progress'
@@ -101,6 +111,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/capabilities'
+    | '/catalog'
     | '/explore'
     | '/internal'
     | '/progress'
@@ -111,6 +122,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_app'
     | '/_app/capabilities'
+    | '/_app/catalog'
     | '/_app/explore'
     | '/_app/internal'
     | '/_app/progress'
@@ -174,6 +186,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppExploreRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/catalog': {
+      id: '/_app/catalog'
+      path: '/catalog'
+      fullPath: '/catalog'
+      preLoaderRoute: typeof AppCatalogRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/capabilities': {
       id: '/_app/capabilities'
       path: '/capabilities'
@@ -186,6 +205,7 @@ declare module '@tanstack/react-router' {
 
 interface AppRouteChildren {
   AppCapabilitiesRoute: typeof AppCapabilitiesRoute
+  AppCatalogRoute: typeof AppCatalogRoute
   AppExploreRoute: typeof AppExploreRoute
   AppInternalRoute: typeof AppInternalRoute
   AppProgressRoute: typeof AppProgressRoute
@@ -195,6 +215,7 @@ interface AppRouteChildren {
 
 const AppRouteChildren: AppRouteChildren = {
   AppCapabilitiesRoute: AppCapabilitiesRoute,
+  AppCatalogRoute: AppCatalogRoute,
   AppExploreRoute: AppExploreRoute,
   AppInternalRoute: AppInternalRoute,
   AppProgressRoute: AppProgressRoute,
